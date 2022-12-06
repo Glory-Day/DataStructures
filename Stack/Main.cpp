@@ -16,35 +16,15 @@ public:
     Stack() : index(-1), stack(nullptr) { }
 
     // Abstract data type, ADT
-    int top();
     void push(T data);
     void pop();
+    int top();
     bool empty();
 };
 
-// Returns the most recently stored data in the stack
-template <typename T>
-int Stack<T>::top() {
-    int data;
-
-    try {
-        // Throw exception when accessing NULL pointer
-        if (empty() == true) {
-            throw out_of_range("Stack is empty.");
-        }
-
-        data = *(stack + index);
-    }
-    catch (out_of_range& exception) {
-        cout << exception.what() << endl;
-    }
-
-    return data;
-}
-
 // Push data in a stack
 template <typename T>
-void Stack<T>::push(T data) {
+void Stack<T>::push(const T data) {
     if (empty()) {
         // Stack is not allocated memory
         stack = (T*)malloc(sizeof(T));
@@ -87,6 +67,27 @@ void Stack<T>::pop() {
     }
 }
 
+
+// Returns the most recently stored data in the stack
+template <typename T>
+int Stack<T>::top() {
+    int data;
+
+    try {
+        // Throw exception when accessing NULL pointer
+        if (empty() == true) {
+            throw out_of_range("Stack is empty.");
+        }
+
+        data = *(stack + index);
+    }
+    catch (out_of_range& exception) {
+        cout << exception.what() << endl;
+    }
+
+    return data;
+}
+
 // Check stack is empty
 template <typename T>
 bool Stack<T>::empty() {
@@ -96,37 +97,42 @@ bool Stack<T>::empty() {
 int main() {
     Stack<int> stack = Stack<int>();
 
-    cout << "Data structure - Stack" << endl;
-    cout << "(1). Push data in stack" << endl;
-    cout << "(2). Pop data in stack" << endl;
-    cout << "(3). Show data in stack" << endl;
-    cout << "(4). Check stack is empty" << endl;
-    cout << "(5). Exit" << endl;
-
     bool isLoop = true;
     while (isLoop) {
+        cout << "Data structure - Stack(ADT)" << endl;
+        cout << "(1). push()" << endl;
+        cout << "(2). pop()" << endl;
+        cout << "(3). top()" << endl;
+        cout << "(4). empty()" << endl;
+        cout << " - Input" << endl;
+
         int index;
         cin >> index;
+
         switch (index) {
             case 1:
+                cout << " - Input" << endl;
+
                 int data;
                 cin >> data;
                 stack.push(data);
-                cout << "Pushed " << data << " in stack" << endl;
                 break;
             case 2:
                 stack.pop();
-                cout << "Popped stack" << endl;
                 break;
             case 3:
-                cout << "Top of stack is " << stack.top() << endl;
+                cout << " - Output" << endl;
+                cout << stack.top() << endl;
                 break;
             case 4:
+                cout << " - Output" << endl;
                 cout << (stack.empty() ? "True" : "False") << endl;
                 break;
             default:
                 isLoop = false;
                 break;
         }
+
+        cout << endl;
     }
 }
