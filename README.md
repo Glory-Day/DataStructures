@@ -2,6 +2,8 @@
     <img src="/Resources/Data_Structure_Image.png"/>
 </div>
 
+---
+
 <p align="center">
     <img src="https://img.shields.io/badge/Vim-019733.svg?&style=for-the-badge&logo=Vim&logoColor=white"/>
     <img src="https://img.shields.io/badge/Clion-000000.svg?&style=for-the-badge&logo=CLion&logoColor=white"/>
