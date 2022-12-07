@@ -16,7 +16,7 @@ public:
     Queue() : size(0), head(-1), tail(-1), queue(nullptr) {}
 
     // Queue constructor to allocate queue memory
-    explicit Queue(const int _size) : size(_size), head(-1),tail(-1), queue((T*)calloc(_size,sizeof(T))) {}
+    explicit Queue(const int _size) : size(_size), head(-1), tail(-1), queue((T*)calloc(_size,sizeof(T))) {}
 
     // Abstract data type, ADT
     void push(T data);
