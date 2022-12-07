@@ -19,15 +19,15 @@ public:
     explicit Queue(const int _size) : size(_size), head(-1), tail(-1), queue((T*)calloc(_size,sizeof(T))) {}
 
     // Abstract data type, ADT
-    void push(T data);
-    void pop();
+    void enqueue(T data);
+    void dequeue();
     T front();
     bool empty();
 };
 
 // Push data in queue
 template <typename T>
-void Queue<T>::push(T data) {
+void Queue<T>::enqueue(T data) {
     try {
         // Throw exception when accessing null pointer
         if (tail == size - 1) {
@@ -45,7 +45,7 @@ void Queue<T>::push(T data) {
 
 // Pop data in queue
 template <typename T>
-void Queue<T>::pop() {
+void Queue<T>::dequeue() {
     try {
         // Throw exception when accessing null pointer
         if (empty()) {
@@ -92,8 +92,8 @@ int main() {
     bool isLoop = true;
     while (isLoop) {
         cout << "Data structure - Queue(ADT)" << endl;
-        cout << "(1). push()" << endl;
-        cout << "(2). pop()" << endl;
+        cout << "(1). enqueue()" << endl;
+        cout << "(2). dequeue()" << endl;
         cout << "(3). front()" << endl;
         cout << "(4). empty()" << endl;
         cout << " - Input" << endl;
@@ -106,10 +106,10 @@ int main() {
                 int data;
                 cout << " - Input" << endl;
                 cin >> data;
-                queue.push(data);
+                queue.enqueue(data);
                 break;
             case 2:
-                queue.pop();
+                queue.dequeue();
                 break;
             case 3:
                 cout << " - Output" << endl;
