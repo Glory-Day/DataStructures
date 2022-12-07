@@ -6,10 +6,8 @@ using namespace std;
 template <typename T>
 class Stack {
 private:
-    // Current index number of the stack;
-    int index;
-    // Stack where data is stored
-    T* stack;
+    int index; // Current index number of the stack;
+    T*  stack; // Stack where data is stored
 
 public:
     // Stack constructor
@@ -22,7 +20,7 @@ public:
     bool empty();
 };
 
-// Push data in a stack
+// Push data in stack
 template <typename T>
 void Stack<T>::push(const T data) {
     if (empty()) {
@@ -47,7 +45,7 @@ void Stack<T>::push(const T data) {
 template <typename T>
 void Stack<T>::pop() {
     try {
-        // Throw exception when accessing NULL pointer
+        // Throw exception when accessing null pointer
         if (empty()) {
             throw out_of_range("Stack is empty.");
         }
@@ -63,6 +61,7 @@ void Stack<T>::pop() {
         }
     }
     catch (out_of_range& exception) {
+        cout << " - Exception" << endl;
         cout << exception.what() << endl;
     }
 }
@@ -71,10 +70,10 @@ void Stack<T>::pop() {
 // Returns the most recently stored data in the stack
 template <typename T>
 int Stack<T>::top() {
-    int data;
+    T data;
 
     try {
-        // Throw exception when accessing NULL pointer
+        // Throw exception when accessing null pointer
         if (empty() == true) {
             throw out_of_range("Stack is empty.");
         }
@@ -82,6 +81,7 @@ int Stack<T>::top() {
         data = *(stack + index);
     }
     catch (out_of_range& exception) {
+        cout << " - Exception" << endl;
         cout << exception.what() << endl;
     }
 
