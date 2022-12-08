@@ -6,12 +6,12 @@ using namespace std;
 template <typename T>
 class Stack {
 private:
-    int index; // Current index number of the stack;
-    T*  stack; // Stack where data is stored
+    int _index; // Current index number of the stack;
+    T*  _stack; // Stack where data is stored
 
 public:
     // Stack constructor
-    Stack() : index(-1), stack(nullptr) { }
+    Stack() : _index(-1), _stack(nullptr) { }
 
     // Abstract data type, ADT
     void push(T data);
@@ -25,19 +25,19 @@ template <typename T>
 void Stack<T>::push(const T data) {
     if (empty()) {
         // Stack is not allocated memory
-        stack = (T*)malloc(sizeof(T));
+        _stack = (T*)malloc(sizeof(T));
 
         // Store data and increase index
-        *stack = data;
-        index++;
+        *_stack = data;
+        _index++;
     }
     else {
         // Reallocate one more memory increase from the current allocated memory
-        int size = (++index) + 1;
-        stack = (T*)realloc(stack, sizeof(T) * size);
+        int size = (++_index) + 1;
+        _stack = (T*)realloc(_stack, sizeof(T) * size);
 
         // Store data
-        *(stack + index) = data;
+        *(_stack + _index) = data;
     }
 }
 
@@ -50,14 +50,13 @@ void Stack<T>::pop() {
             throw out_of_range("Stack is empty.");
         }
 
-        // Get popped stack size
-        int size = (--index) + 1;
-        if (size == 0) {
-            free(stack);
+        if (_index == 0) {
+            // Returns allocated memory to prevent memory leakage
+            free(_stack);
         }
         else {
             // Reallocate one more memory decrease from the current allocated memory
-            stack = (T*)realloc(stack, sizeof(T) * size);
+            _stack = (T*)realloc(_stack, sizeof(T) * (_index - 1));
         }
     }
     catch (out_of_range& exception) {
@@ -78,7 +77,7 @@ int Stack<T>::top() {
             throw out_of_range("Stack is empty.");
         }
 
-        data = *(stack + index);
+        data = *(_stack + _index);
     }
     catch (out_of_range& exception) {
         cout << " - Exception" << endl;
@@ -91,7 +90,7 @@ int Stack<T>::top() {
 // Check stack is empty
 template <typename T>
 bool Stack<T>::empty() {
-    return index == -1;
+    return _index == -1;
 }
 
 int main() {
