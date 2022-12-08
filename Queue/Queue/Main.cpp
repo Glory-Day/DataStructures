@@ -6,17 +6,17 @@ using namespace std;
 template <typename T>
 class Queue {
 private:
-    int size; // Number of queue memory size
-    int head; // Index of queue head
-    int tail; // Index of queue tail
-    T* queue; // Queue where data is stored
+    int _size; // Number of queue memory size
+    int _head; // Index of queue head
+    int _tail; // Index of queue tail
+    T* _queue; // Queue where data is stored
 
 public:
     // Default queue constructor
-    Queue() : size(0), head(-1), tail(-1), queue(nullptr) {}
+    Queue() : _size(0), _head(-1), _tail(-1), _queue(nullptr) {}
 
     // Queue constructor to allocate queue memory
-    explicit Queue(const int _size) : size(_size), head(-1), tail(-1), queue((T*)calloc(_size,sizeof(T))) {}
+    explicit Queue(const int size) : _size(size), _head(-1), _tail(-1), _queue((T*)calloc(size,sizeof(T))) {}
 
     // Abstract data type, ADT
     void enqueue(T data);
@@ -30,12 +30,12 @@ template <typename T>
 void Queue<T>::enqueue(T data) {
     try {
         // Throw exception when accessing null pointer
-        if (tail == size - 1) {
+        if (_tail == _size - 1) {
             throw out_of_range("Queue is full.");
         }
 
         // Store data
-        queue[++tail] = data;
+        _queue[++_tail] = data;
     }
     catch (out_of_range& exception) {
         cout << " - Exception" << endl;
@@ -53,7 +53,7 @@ void Queue<T>::dequeue() {
         }
 
         // Increase queue head index
-        head++;
+        _head++;
     }
     catch (out_of_range& exception) {
         cout << " - Exception" << endl;
@@ -61,6 +61,7 @@ void Queue<T>::dequeue() {
     }
 }
 
+// Returns the first stored data in the stack
 template <typename T>
 T Queue<T>::front() {
     T data;
@@ -71,9 +72,10 @@ T Queue<T>::front() {
             throw out_of_range("Queue is empty.");
         }
 
-        data = queue[head + 1];
+        data = _queue[_head + 1];
     }
     catch (out_of_range& exception) {
+        cout << " - Exception" << endl;
         cout << exception.what() << endl;
     }
 
@@ -83,7 +85,7 @@ T Queue<T>::front() {
 // Check queue is empty
 template <typename T>
 bool Queue<T>::empty() {
-    return head == tail;
+    return _head == _tail;
 }
 
 int main() {
