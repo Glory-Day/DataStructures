@@ -29,7 +29,7 @@ template <typename T>
 void CircularQueue<T>::enqueue(T data) {
     try {
         // Throw exception when accessing null pointer
-        if (_head == ((_tail + 1) % _size)) {
+        if ((_head == -1 && _tail == (_size - 1)) || (_head == ((_tail + 1) % _size))) {
             throw out_of_range("Queue is full.");
         }
 
