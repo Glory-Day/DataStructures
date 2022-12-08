@@ -73,7 +73,7 @@ int Stack<T>::top() {
 
     try {
         // Throw exception when accessing null pointer
-        if (empty() == true) {
+        if (empty()) {
             throw out_of_range("Stack is empty.");
         }
 
