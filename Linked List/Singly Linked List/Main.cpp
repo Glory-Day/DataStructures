@@ -59,7 +59,9 @@ public:
      */
     SinglyLinkedList() : _head{nullptr} {}
 
-    /// Abstract data type, ADT
+    /**
+     * Abstract data type, ADT
+     */
     void push_back(T data);
     bool insert(int index, T data);
     bool pop_back();
@@ -133,6 +135,11 @@ bool SinglyLinkedList<T>::insert(int index, T data) {
     return false;
 }
 
+/**
+ * Pop back data in singly linked list
+ * @tparam T : Data type
+ * @return Check data is pop or not
+ */
 template <typename T>
 bool SinglyLinkedList<T>::pop_back() {
     try {
@@ -164,6 +171,12 @@ bool SinglyLinkedList<T>::pop_back() {
     return false;
 }
 
+/**
+ * Remove data into the specified index in linked list
+ * @tparam T : Data type
+ * @param index : Number of linked list
+ * @return Check data is removed in linked list or not
+ */
 template <typename T>
 bool SinglyLinkedList<T>::remove(int index) {
     try {
@@ -199,6 +212,12 @@ bool SinglyLinkedList<T>::remove(int index) {
     return false;
 }
 
+/**
+ * Searching data in singly linked list
+ * @tparam T : Data type
+ * @param data : Data to search
+ * @return If data is found, it returns index of node, and if not, it returns -1
+ */
 template <typename T>
 int SinglyLinkedList<T>::search(T data) {
     int index = 0;
@@ -211,7 +230,6 @@ int SinglyLinkedList<T>::search(T data) {
 
     return -1;
 }
-
 
 /**
  * Calculate size of linked list
@@ -240,6 +258,10 @@ bool SinglyLinkedList<T>::empty() {
     return _head == nullptr;
 }
 
+/**
+ * Clear entire nodes in singly linked list
+ * @tparam T : Data type
+ */
 template <typename T>
 void SinglyLinkedList<T>::clear() {
     Node* pNode;
