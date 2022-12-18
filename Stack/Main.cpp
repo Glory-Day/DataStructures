@@ -10,7 +10,9 @@ private:
     T*  _stack; // Stack where data is stored
 
 public:
-    // Stack constructor
+    /**
+     * Default stack constructor
+     */
     Stack() : _index(-1), _stack(nullptr) { }
 
     // Abstract data type, ADT
@@ -20,7 +22,11 @@ public:
     bool empty();
 };
 
-// Push data in stack
+/**
+ * Push data in stack
+ * @tparam T : Data type
+ * @param data : Data to add
+ */
 template <typename T>
 void Stack<T>::push(const T data) {
     if (empty()) {
@@ -41,7 +47,10 @@ void Stack<T>::push(const T data) {
     }
 }
 
-// Pop data in stack
+/**
+ * Pop data in stack
+ * @tparam T : Data type
+ */
 template <typename T>
 void Stack<T>::pop() {
     try {
@@ -66,7 +75,11 @@ void Stack<T>::pop() {
 }
 
 
-// Returns the most recently stored data in the stack
+/**
+ * Returns the first stored data in the stack
+ * @tparam T : Data type
+ * @return First stored data in the stack
+ */
 template <typename T>
 int Stack<T>::top() {
     T data;
@@ -87,7 +100,11 @@ int Stack<T>::top() {
     return data;
 }
 
-// Check stack is empty
+/**
+ * Check stack is empty
+ * @tparam T : Data type
+ * @return Stack is empty or not
+ */
 template <typename T>
 bool Stack<T>::empty() {
     return _index == -1;
