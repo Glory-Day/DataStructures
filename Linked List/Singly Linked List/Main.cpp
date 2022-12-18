@@ -6,12 +6,12 @@ template <typename T>
 class SinglyLinkedList {
 private:
     /**
-     * Element of linked list
+     * Element of singly linked list
      */
     class Node {
     private:
-        T     _data; /// Data of node
-        Node* _next; /// Next linked node pointer
+        T     _data; // Data of node
+        Node* _next; // Next linked node pointer
 
     public:
         /**
@@ -26,32 +26,13 @@ private:
          */
         explicit Node(T data, Node* next) : _data{data}, _next{next} {}
 
-        /**
-         * Get node's data
-         * @return Data of node
-         */
-        T getData() {
-            return _data;
-        }
+        T getData() { return _data; }
 
-        /**
-         * Get node's next linked node pointer
-         * @return Next linked node pointer
-         */
-        Node* getNext() {
-            return _next;
-        }
-
-        /**
-         * Set node's next linked node pointer
-         * @param next : Next linked node pointer
-         */
-        void setNext(Node* next) {
-            _next = next;
-        }
+        Node* getNext() { return _next; }
+        void setNext(Node* next) { _next = next; }
     };
 
-    Node* _head; /// Head of singly linked list
+    Node* _head; // Head of singly linked list
 
 public:
     /**
@@ -59,9 +40,7 @@ public:
      */
     SinglyLinkedList() : _head{nullptr} {}
 
-    /**
-     * Abstract data type, ADT
-     */
+    // Abstract data type, ADT
     void push_back(T data);
     bool insert(int index, T data);
     bool pop_back();
@@ -79,12 +58,15 @@ public:
  */
 template <typename T>
 void SinglyLinkedList<T>::push_back(T data) {
+    // Create new node
     Node* newNode = new Node(data, nullptr);
 
     if (empty()) {
+        // Singly linked list is empty
         _head = newNode;
     }
     else {
+        // Add new node at last in linked list
         for (Node* pNode = _head; true; pNode = pNode->getNext()) {
             if (pNode->getNext() == nullptr) {
                 pNode->setNext(newNode);
@@ -104,17 +86,21 @@ void SinglyLinkedList<T>::push_back(T data) {
 template <typename T>
 bool SinglyLinkedList<T>::insert(int index, T data) {
     try {
+        // Throw exception when index is out of range in linked list
         if (size() < index) {
             throw out_of_range("Index is out of range");
         }
 
+        // Create new node
         Node* newNode = new Node(data, nullptr);
 
         if (index == 0) {
+            // Index of linked list is equaled head
             newNode->setNext(_head);
             _head = newNode;
         }
         else {
+            // Insert new node at the index in linked list
             int i = 0;
             for (Node* pNode = _head; true; pNode = pNode->getNext(), i++) {
                 if (i == index - 1) {
@@ -143,15 +129,18 @@ bool SinglyLinkedList<T>::insert(int index, T data) {
 template <typename T>
 bool SinglyLinkedList<T>::pop_back() {
     try {
+        // Throw exception when accessing null pointer
         if (empty()) {
             throw out_of_range("Linked list is empty.");
         }
 
         if (size() == 1) {
+            // Delete node in head
             delete _head;
             _head = nullptr;
         }
         else {
+            // Delete node at last in linked list
             for (Node *pNode = _head; true; pNode = pNode->getNext()) {
                 if (pNode->getNext()->getNext() == nullptr) {
                     delete pNode->getNext();
@@ -180,17 +169,20 @@ bool SinglyLinkedList<T>::pop_back() {
 template <typename T>
 bool SinglyLinkedList<T>::remove(int index) {
     try {
+        // Throw exception when index is out of range in linked list
         if (size() < index) {
             throw out_of_range("Index is out of range");
         }
 
         Node* pNode;
         if (index == 0) {
+            // Delete node in head
             pNode = _head->getNext();
             delete _head;
             _head = pNode;
         }
         else {
+            // Delete node at the index in linked list
             int i = 1;
             for (pNode = _head; true; pNode = pNode->getNext(), i++) {
                 if (i == index) {
@@ -221,7 +213,6 @@ bool SinglyLinkedList<T>::remove(int index) {
 template <typename T>
 int SinglyLinkedList<T>::search(T data) {
     int index = 0;
-
     for (Node* pNode = _head; pNode != nullptr; pNode = pNode->getNext(), index++) {
         if (pNode->getData() == data) {
             return index;
@@ -233,7 +224,6 @@ int SinglyLinkedList<T>::search(T data) {
 
 /**
  * Calculate size of linked list
- *
  * @tparam T Data type
  * @return Number of linked list size
  */
@@ -249,7 +239,6 @@ int SinglyLinkedList<T>::size() {
 
 /**
  * Check linked list is empty
- *
  * @tparam T : Data type
  * @return Linked list is empty or not
  */
