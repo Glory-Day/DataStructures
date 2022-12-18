@@ -6,15 +6,20 @@ using namespace std;
 template <typename T>
 class CircularQueue {
     int _size; // Number of queue memory size
-    int _head; // Index of queue head
-    int _tail; // Index of queue tail
+    int _head; // Head of queue index
+    int _tail; // Tail of queue index
     T* _queue; // Queue where data is stored
 
 public:
-    // Default queue constructor
+    /**
+     * Default queue constructor
+     */
     CircularQueue() : _size(0), _head(-1), _tail(-1), _queue(nullptr) {}
 
-    // Queue constructor to allocate queue memory
+    /**
+     * Queue constructor to allocate queue memory
+     * @param size : Size of allocating queue memory
+     */
     explicit CircularQueue(const int size) : _size(size), _head(-1), _tail(-1), _queue((T*)calloc(size, sizeof(T))) {}
 
     // Abstract data type, ADT
@@ -24,7 +29,11 @@ public:
     bool empty();
 };
 
-// Push data in queue
+/**
+ * Add data in queue
+ * @tparam T : Data type
+ * @param data : Data to add
+ */
 template <typename T>
 void CircularQueue<T>::enqueue(T data) {
     try {
@@ -43,7 +52,10 @@ void CircularQueue<T>::enqueue(T data) {
     }
 }
 
-// Pop data in queue
+/**
+ * Remove data in queue
+ * @tparam T : Data type
+ */
 template <typename T>
 void CircularQueue<T>::dequeue() {
     try {
@@ -61,7 +73,11 @@ void CircularQueue<T>::dequeue() {
     }
 }
 
-// Returns the first stored data in the stack
+/**
+ * Returns the first stored data in the queue
+ * @tparam T : Data type
+ * @return First stored data in the queue
+ */
 template <typename T>
 T CircularQueue<T>::front() {
     T data;
@@ -82,7 +98,11 @@ T CircularQueue<T>::front() {
     return data;
 }
 
-// Check queue is empty
+/**
+ * Check queue is empty
+ * @tparam T : Data type
+ * @return Queue is empty or not
+ */
 template <typename T>
 bool CircularQueue<T>::empty() {
     return _head == _tail;
