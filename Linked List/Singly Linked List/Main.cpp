@@ -5,9 +5,6 @@ using namespace std;
 template <typename T>
 class SinglyLinkedList {
 private:
-    /**
-     * Element of singly linked list
-     */
     class Node {
     private:
         T     _data; // Data of node
