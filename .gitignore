@@ -23,8 +23,10 @@
 .idea/**/contentModel.xml
 
 # Sensitive or high-churn files
+.idea/**/.gitignore
 .idea/**/dataSources/
 .idea/**/dataSources.ids
+.idea/**/Project_Default.xml
 .idea/**/dataSources.local.xml
 .idea/**/sqlDataSources.xml
 .idea/**/dynamic.xml
@@ -157,8 +159,8 @@ _deps
 # .idea/artifacts
 # .idea/compiler.xml
 # .idea/jarRepositories.xml
-# .idea/modules.xml
-# .idea/*.iml
+.idea/modules.xml
+.idea/*.iml
 # .idea/modules
 # *.iml
 # *.ipr
