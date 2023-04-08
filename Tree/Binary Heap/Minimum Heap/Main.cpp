@@ -71,17 +71,17 @@ void MinimumHeap<T>::heapify(int index) {
      int leftChildIndex = getLeftChildIndex(index);
      int rightChildIndex = getRightChildIndex(index);
 
-     int minimizeNodeIndex = index;
-     if (leftChildIndex < _size && _head[leftChildIndex] < _head[index]) {
-         minimizeNodeIndex = leftChildIndex;
+     int updatedIndex = index;
+     if (leftChildIndex < _size && _head[leftChildIndex] < _head[updatedIndex]) {
+         updatedIndex = leftChildIndex;
      }
-     if (rightChildIndex < _size && _head[rightChildIndex] < _head[minimizeNodeIndex]) {
-         minimizeNodeIndex = rightChildIndex;
+     if (rightChildIndex < _size && _head[rightChildIndex] < _head[updatedIndex]) {
+         updatedIndex = rightChildIndex;
      }
 
-     if (minimizeNodeIndex != index) {
-         swap(_head[index], _head[minimizeNodeIndex]);
-         heapify(minimizeNodeIndex);
+     if (updatedIndex != index) {
+         swap(_head[index], _head[updatedIndex]);
+         heapify(updatedIndex);
      }
 }
 
@@ -92,6 +92,10 @@ void MinimumHeap<T>::heapify(int index) {
  */
 template <typename T>
 T MinimumHeap<T>::top() {
+    if (_size <= 0) {
+        throw out_of_range("Minimum heap is empty.");
+    }
+
     return _head[0];
 }
 
@@ -167,5 +171,7 @@ int main() {
                 isLoop = false;
                 break;
         }
+
+        cout << endl;
     }
 }
