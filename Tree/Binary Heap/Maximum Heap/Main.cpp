@@ -92,11 +92,19 @@ void MaximumHeap<T>::heapify(int index) {
  */
 template <typename T>
 T MaximumHeap<T>::top() {
-    if (_size <= 0) {
-        throw out_of_range("Maximum heap is empty.");
+    try {
+        if (_size <= 0) {
+            throw out_of_range("Maximum heap is empty.");
+        }
+
+        return _head[0];
+    }
+    catch (out_of_range& exception) {
+        cout << " - Exception" << endl;
+        cout << exception.what() << endl;
     }
 
-    return _head[0];
+    return -1;
 }
 
 /**
@@ -106,16 +114,22 @@ T MaximumHeap<T>::top() {
  */
 template <typename T>
 void MaximumHeap<T>::insert(T value) {
-    if (_size == _capacity) {
-        throw out_of_range("Maximize heap is full.");
+    try {
+        if (_size == _capacity) {
+            throw out_of_range("Maximize heap is full.");
+        }
+
+        int index = ++_size - 1;
+        _head[index] = value;
+
+        while (index != 0 && _head[getParentIndex(index)] > _head[index]) {
+            swap(_head[index], _head[getParentIndex(index)]);
+            index = getParentIndex(index);
+        }
     }
-
-    int index = ++_size - 1;
-    _head[index] = value;
-
-    while (index != 0 && _head[getParentIndex(index)] > _head[index]) {
-        swap(_head[index], _head[getParentIndex(index)]);
-        index = getParentIndex(index);
+    catch (out_of_range& exception) {
+        cout << " - Exception" << endl;
+        cout << exception.what() << endl;
     }
 }
 
@@ -125,18 +139,24 @@ void MaximumHeap<T>::insert(T value) {
  */
 template <typename T>
 void MaximumHeap<T>::extract() {
-    if (_size <= 0) {
-        throw out_of_range("Maximum heap is empty.");
-    }
+    try {
+        if (_size <= 0) {
+            throw out_of_range("Maximum heap is empty.");
+        }
 
-    if (_size == 1) {
+        if (_size == 1) {
+            _size--;
+            return;
+        }
+
+        _head[0] = _head[_size - 1];
         _size--;
-        return;
+        heapify(0);
     }
-
-    _head[0] = _head[_size - 1];
-    _size--;
-    heapify(0);
+    catch (out_of_range& exception) {
+        cout << " - Exception" << endl;
+        cout << exception.what() << endl;
+    }
 }
 
 int main() {
