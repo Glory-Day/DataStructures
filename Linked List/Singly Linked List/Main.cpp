@@ -1,112 +1,74 @@
 #include <iostream>
+#include "../Node.cpp"
 
 using namespace std;
+using namespace SinglyLinkedList;
 
 template <typename T>
-class SinglyLinkedList {
+class LinkedList {
 private:
-    class Node {
-    private:
-        T     _data; // Data of node
-        Node* _next; // Next linked node pointer
-
-    public:
-        /**
-         * Default node constructor
-         */
-        Node() : _data{0}, _next{nullptr} {}
-
-        /**
-         * Node constructor to initialize node's fields
-         * @param data : Data of node
-         * @param next : Next linked node pointer
-         */
-        explicit Node(T data, Node* next) : _data{data}, _next{next} {}
-
-        T getData() { return _data; }
-
-        Node* getNext() { return _next; }
-        void setNext(Node* next) { _next = next; }
-    };
-
-    Node* _head; // Head of singly linked list
+    Node<T>* _head; // Head of singly linked list
 
 public:
     /**
      * Default singly linked list constructor
      */
-    SinglyLinkedList() : _head{nullptr} {}
+    LinkedList() : _head{new Node<T>()} {}
 
     // Abstract data type, ADT
-    void push_back(T data);
-    bool insert(int index, T data);
-    bool pop_back();
-    bool remove(int index);
-    int search(T data);
+    void push_front(T);
+    bool pop_front();
+    bool insert(int, T);
+    bool remove(int);
+    int search(T);
     bool empty();
     int size();
     void clear();
 };
 
 /**
- * Push back data in linked list
+ * Push front data in linked list
  * @tparam T : Data type
  * @param data : Added data
  */
 template <typename T>
-void SinglyLinkedList<T>::push_back(T data) {
+void LinkedList<T>::push_front(T data) {
     // Create new node
-    Node* newNode = new Node(data, nullptr);
+    Node<T>* newNode = new Node<T>(data, nullptr);
 
+    // Singly linked list is empty
     if (empty()) {
-        // Singly linked list is empty
-        _head = newNode;
+        _head->setNext(newNode);
     }
     else {
-        // Add new node at last in linked list
-        for (Node* pNode = _head; true; pNode = pNode->getNext()) {
-            if (pNode->getNext() == nullptr) {
-                pNode->setNext(newNode);
-                break;
-            }
-        }
+        newNode->setNext(_head->getNext());
+        _head->setNext(newNode);
     }
 }
 
 /**
- * Insert data into the specified index in linked list
+ * Pop front data in singly linked list
  * @tparam T : Data type
- * @param index : Number of linked list index
- * @param data : Added data
- * @return Check data is inserted in linked list or not
+ * @return Check data is pop or not
  */
 template <typename T>
-bool SinglyLinkedList<T>::insert(int index, T data) {
+bool LinkedList<T>::pop_front() {
     try {
-        // Throw exception when index is out of range in linked list
-        if (size() < index) {
-            throw out_of_range("Index is out of range");
+        // Throw exception when accessing null pointer
+        if (empty()) {
+            throw out_of_range("Linked list is empty.");
         }
 
-        // Create new node
-        Node* newNode = new Node(data, nullptr);
-
-        if (index == 0) {
-            // Index of linked list is equaled head
-            newNode->setNext(_head);
-            _head = newNode;
+        Node<T>* node = _head->getNext();
+        if (size() == 1) {
+            _head->setNext(nullptr);
         }
         else {
-            // Insert new node at the index in linked list
-            int i = 0;
-            for (Node* pNode = _head; true; pNode = pNode->getNext(), i++) {
-                if (i == index - 1) {
-                    newNode->setNext(pNode->getNext());
-                    pNode->setNext(newNode);
-                    break;
-                }
-            }
+            _head->setNext(node->getNext());
         }
+
+        // Delete first node in singly linked list
+        delete node;
 
         return true;
     }
@@ -119,29 +81,33 @@ bool SinglyLinkedList<T>::insert(int index, T data) {
 }
 
 /**
- * Pop back data in singly linked list
+ * Insert data into the specified index in linked list
  * @tparam T : Data type
- * @return Check data is pop or not
+ * @param index : Number of linked list index
+ * @param data : Added data
+ * @return Check data is inserted in linked list or not
  */
 template <typename T>
-bool SinglyLinkedList<T>::pop_back() {
+bool LinkedList<T>::insert(int index, T data) {
     try {
-        // Throw exception when accessing null pointer
-        if (empty()) {
-            throw out_of_range("Linked list is empty.");
+        // Throw exception when index is out of range in linked list
+        if (size() < index) {
+            throw out_of_range("Index is out of range");
         }
 
-        if (size() == 1) {
-            // Delete node in head
-            delete _head;
-            _head = nullptr;
+        if (index == 0) {
+            push_front(data);
         }
         else {
-            // Delete node at last in linked list
-            for (Node *pNode = _head; true; pNode = pNode->getNext()) {
-                if (pNode->getNext()->getNext() == nullptr) {
-                    delete pNode->getNext();
-                    pNode->setNext(nullptr);
+            // Create new node
+            Node<T>* newNode = new Node<T>(data, nullptr);
+
+            // Insert new node at the index in linked list
+            int i = 1;
+            for (Node<T>* pNode = _head->getNext()->getNext(); true; pNode = pNode->getNext(), i++) {
+                if (i == index) {
+                    newNode->setNext(pNode->getNext());
+                    pNode->setNext(newNode);
                     break;
                 }
             }
@@ -164,26 +130,22 @@ bool SinglyLinkedList<T>::pop_back() {
  * @return Check data is removed in linked list or not
  */
 template <typename T>
-bool SinglyLinkedList<T>::remove(int index) {
+bool LinkedList<T>::remove(int index) {
     try {
         // Throw exception when index is out of range in linked list
         if (size() < index) {
             throw out_of_range("Index is out of range");
         }
 
-        Node* pNode;
         if (index == 0) {
-            // Delete node in head
-            pNode = _head->getNext();
-            delete _head;
-            _head = pNode;
+            pop_front();
         }
         else {
             // Delete node at the index in linked list
             int i = 1;
-            for (pNode = _head; true; pNode = pNode->getNext(), i++) {
+            for (Node<T>* pNode = _head->getNext()->getNext(); true; pNode = pNode->getNext(), i++) {
                 if (i == index) {
-                    Node* searched = pNode->getNext();
+                    Node<T>* searched = pNode->getNext();
                     pNode->setNext(pNode->getNext()->getNext());
                     delete searched;
                     break;
@@ -208,9 +170,9 @@ bool SinglyLinkedList<T>::remove(int index) {
  * @return If data is found, it returns index of node, and if not, it returns -1
  */
 template <typename T>
-int SinglyLinkedList<T>::search(T data) {
+int LinkedList<T>::search(T data) {
     int index = 0;
-    for (Node* pNode = _head; pNode != nullptr; pNode = pNode->getNext(), index++) {
+    for (Node<T>* pNode = _head->getNext(); pNode != nullptr; pNode = pNode->getNext(), index++) {
         if (pNode->getData() == data) {
             return index;
         }
@@ -225,9 +187,9 @@ int SinglyLinkedList<T>::search(T data) {
  * @return Number of linked list size
  */
 template <typename T>
-int SinglyLinkedList<T>::size() {
+int LinkedList<T>::size() {
     int size = 0;
-    for (Node* pNode = _head; pNode != nullptr; pNode = pNode->getNext()) {
+    for (Node<T>* pNode = _head->getNext(); pNode != nullptr; pNode = pNode->getNext()) {
         size++;
     }
 
@@ -240,8 +202,8 @@ int SinglyLinkedList<T>::size() {
  * @return Linked list is empty or not
  */
 template <typename T>
-bool SinglyLinkedList<T>::empty() {
-    return _head == nullptr;
+bool LinkedList<T>::empty() {
+    return _head->getNext() == nullptr;
 }
 
 /**
@@ -249,24 +211,21 @@ bool SinglyLinkedList<T>::empty() {
  * @tparam T : Data type
  */
 template <typename T>
-void SinglyLinkedList<T>::clear() {
-    Node* pNode;
-    while (_head != nullptr) {
-        pNode = _head->getNext();
-        delete _head;
-        _head = pNode;
+void LinkedList<T>::clear() {
+    while (_head->getNext() != nullptr) {
+        pop_front();
     }
 }
 
 int main() {
-    SinglyLinkedList<int> linkedList = SinglyLinkedList<int>();
+    LinkedList<int> linkedList = LinkedList<int>();
 
     bool isLoop = true;
     while (isLoop) {
-        cout << "Data structure - Singly Linked List(ADT)" << endl;
-        cout << "(1). push_back()" << endl;
-        cout << "(2). insert()" << endl;
-        cout << "(3). pop_back()" << endl;
+        cout << "Data structure - Linked List(ADT)" << endl;
+        cout << "(1). push_front()" << endl;
+        cout << "(2). pop_front()" << endl;
+        cout << "(3). insert()" << endl;
         cout << "(4). remove()" << endl;
         cout << "(5). search()" << endl;
         cout << "(6). empty()" << endl;
@@ -282,17 +241,17 @@ int main() {
             case 1:
                 cout << " - Input" << endl;
                 cin >> data;
-                linkedList.push_back(data);
+                linkedList.push_front(data);
                 break;
             case 2:
+                linkedList.pop_front();
+                break;
+            case 3:
                 cout << " - Input" << endl;
                 cin >> index;
                 cout << " - Input" << endl;
                 cin >> data;
                 linkedList.insert(index, data);
-                break;
-            case 3:
-                linkedList.pop_back();
                 break;
             case 4:
                 cout << " - Input" << endl;
