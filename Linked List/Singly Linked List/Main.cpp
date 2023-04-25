@@ -104,7 +104,7 @@ bool LinkedList<T>::insert(int index, T data) {
 
             // Insert new node at the index in linked list
             int i = 1;
-            for (Node<T>* pNode = _head->getNext()->getNext(); true; pNode = pNode->getNext(), i++) {
+            for (Node<T>* pNode = _head->getNext(); true; pNode = pNode->getNext(), i++) {
                 if (i == index) {
                     newNode->setNext(pNode->getNext());
                     pNode->setNext(newNode);
@@ -143,7 +143,7 @@ bool LinkedList<T>::remove(int index) {
         else {
             // Delete node at the index in linked list
             int i = 1;
-            for (Node<T>* pNode = _head->getNext()->getNext(); true; pNode = pNode->getNext(), i++) {
+            for (Node<T>* pNode = _head->getNext(); true; pNode = pNode->getNext(), i++) {
                 if (i == index) {
                     Node<T>* searched = pNode->getNext();
                     pNode->setNext(pNode->getNext()->getNext());
