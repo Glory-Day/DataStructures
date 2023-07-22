@@ -1,5 +1,5 @@
 <div align="center">
-    <img src="/Resources/Data_Structure_Image.png"/>
+    <img src="/.resources/thumbnail.png"/>
 </div>
 
 ---
