@@ -13,7 +13,7 @@ public:
     /**
      * Default singly linked list constructor
      */
-    LinkedList() : _head{new Node<T>()} {}
+    LinkedList() : _head{new Node<T>(-1, nullptr)} {}
 
     // Abstract data type, ADT
     void push_front(T);
@@ -34,7 +34,7 @@ public:
 template <typename T>
 void LinkedList<T>::push_front(T data) {
     // Create new node
-    Node<T>* newNode = new Node<T>(data, nullptr);
+    auto* newNode = new Node<T>(data, nullptr);
 
     // Singly linked list is empty
     if (empty()) {
@@ -100,14 +100,14 @@ bool LinkedList<T>::insert(int index, T data) {
         }
         else {
             // Create new node
-            Node<T>* newNode = new Node<T>(data, nullptr);
+            auto* newNode = new Node<T>(data, nullptr);
 
             // Insert new node at the index in linked list
             int i = 1;
-            for (Node<T>* pNode = _head->getNext()->getNext(); true; pNode = pNode->getNext(), i++) {
-                if (i == index) {
-                    newNode->setNext(pNode->getNext());
-                    pNode->setNext(newNode);
+            for (Node<T>* node = _head->getNext()->getNext(); true; node = node->getNext(), i++) {
+                if (i == index - 1) {
+                    newNode->setNext(node->getNext());
+                    node->setNext(newNode);
                     break;
                 }
             }
