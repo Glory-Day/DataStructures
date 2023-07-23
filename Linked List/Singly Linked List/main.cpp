@@ -104,10 +104,17 @@ bool LinkedList<T>::insert(int index, T data) {
 
             // Insert new node at the index in linked list
             int i = 1;
-            for (Node<T>* node = _head->getNext()->getNext(); true; node = node->getNext(), i++) {
+<<<<<<< HEAD:Linked List/Singly Linked List/Main.cpp
+            for (Node<T>* pNode = _head->getNext()->getNext(); true; pNode = pNode->getNext(), i++) {
                 if (i == index - 1) {
-                    newNode->setNext(node->getNext());
-                    node->setNext(newNode);
+                    newNode->setNext(pNode->getNext());
+                    pNode->setNext(newNode);
+=======
+            for (Node<T>* pNode = _head->getNext(); true; pNode = pNode->getNext(), i++) {
+                if (i == index) {
+                    newNode->setNext(pNode->getNext());
+                    pNode->setNext(newNode);
+>>>>>>> b5646b35203c653898fcc888e4e81baaae8c986a:Linked List/Singly Linked List/main.cpp
                     break;
                 }
             }
@@ -143,7 +150,7 @@ bool LinkedList<T>::remove(int index) {
         else {
             // Delete node at the index in linked list
             int i = 1;
-            for (Node<T>* pNode = _head->getNext()->getNext(); true; pNode = pNode->getNext(), i++) {
+            for (Node<T>* pNode = _head->getNext(); true; pNode = pNode->getNext(), i++) {
                 if (i == index) {
                     Node<T>* searched = pNode->getNext();
                     pNode->setNext(pNode->getNext()->getNext());
