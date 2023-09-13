@@ -24,7 +24,7 @@ public:
      */
     explicit Queue(const int size) : _size(size), _head(-1), _tail(-1), _queue((T*)calloc(size,sizeof(T))) {}
 
-    T GetFront();
+    T Front();
     bool IsEmpty();
     void Enqueue(T data);
     void Dequeue();
@@ -80,7 +80,7 @@ void Queue<T>::Dequeue() {
  * @return First stored data in the queue
  */
 template <typename T>
-T Queue<T>::GetFront() {
+T Queue<T>::Front() {
     T data;
 
     try {
@@ -136,7 +136,7 @@ int main() {
                 break;
             case 3:
                 cout << " - Output" << endl;
-                cout << queue.GetFront() << endl;
+                cout << queue.Front() << endl;
                 break;
             case 4:
                 cout << " - Output" << endl;
