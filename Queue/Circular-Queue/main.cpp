@@ -23,11 +23,47 @@ public:
      */
     explicit CircularQueue(const int size) : _size(size), _head(-1), _tail(-1), _queue((T*)calloc(size, sizeof(T))) {}
 
-    T GetFront();
+    T Front();
     bool IsEmpty();
     void Enqueue(T data);
     void Dequeue();
 };
+
+/**
+ * Returns the first stored data in the queue
+ * 
+ * @tparam T : Data type
+ * @return First stored data in the queue
+ */
+template <typename T>
+T CircularQueue<T>::Front() {
+    T data;
+
+    try {
+        // Throw exception when accessing null pointer
+        if (IsEmpty()) {
+            throw out_of_range("Circular queue is empty");
+        }
+
+        data = _queue[(_head + 1) % _size];
+    }
+    catch (out_of_range& exception) {
+        cout << " - Exception : " << exception.what() << endl;
+    }
+
+    return data;
+}
+
+/**
+ * Check queue is empty
+ * 
+ * @tparam T : Data type
+ * @return Queue is empty or not
+ */
+template <typename T>
+bool CircularQueue<T>::IsEmpty() {
+    return _head == _tail;
+}
 
 /**
  * Add data in queue
@@ -73,42 +109,6 @@ void CircularQueue<T>::Dequeue() {
     }
 }
 
-/**
- * Returns the first stored data in the queue
- * 
- * @tparam T : Data type
- * @return First stored data in the queue
- */
-template <typename T>
-T CircularQueue<T>::GetFront() {
-    T data;
-
-    try {
-        // Throw exception when accessing null pointer
-        if (IsEmpty()) {
-            throw out_of_range("Circular queue is empty.");
-        }
-
-        data = _queue[(_head + 1) % _size];
-    }
-    catch (out_of_range& exception) {
-        cout << " - Exception : " << exception.what() << endl;
-    }
-
-    return data;
-}
-
-/**
- * Check queue is empty
- * 
- * @tparam T : Data type
- * @return Queue is empty or not
- */
-template <typename T>
-bool CircularQueue<T>::IsEmpty() {
-    return _head == _tail;
-}
-
 int main() {
     CircularQueue<int> queue = CircularQueue<int>(10);
 
@@ -136,7 +136,7 @@ int main() {
                 break;
             case 3:
                 cout << " - Output" << endl;
-                cout << queue.GetFront() << endl;
+                cout << queue.Front() << endl;
                 break;
             case 4:
                 cout << " - Output" << endl;
