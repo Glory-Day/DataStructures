@@ -15,21 +15,57 @@ public:
      */
     Stack() : _index(-1), _stack(nullptr) { }
 
-    // Abstract data type, ADT
-    void push(T data);
-    void pop();
-    int top();
-    bool empty();
+    int GetTop();
+    bool IsEmpty();
+    void Push(T data);
+    void Pop();
 };
 
 /**
+ * Returns the first stored data in the stack
+ * 
+ * @tparam T : Data type
+ * @return First stored data in the stack
+ */
+template <typename T>
+int Stack<T>::GetTop() {
+    T data;
+
+    try {
+        // Throw exception when accessing null pointer
+        if (IsEmpty()) {
+            throw out_of_range("Stack is empty.");
+        }
+
+        data = *(_stack + _index);
+    }
+    catch (out_of_range& exception) {
+        cout << " - Exception : " << exception.what() << endl;
+    }
+
+    return data;
+}
+
+/**
+ * Check stack is empty
+ * 
+ * @tparam T : Data type
+ * @return Stack is empty or not
+ */
+template <typename T>
+bool Stack<T>::IsEmpty() {
+    return _index == -1;
+}
+
+/**
  * Push data in stack
+ * 
  * @tparam T : Data type
  * @param data : Data to add
  */
 template <typename T>
-void Stack<T>::push(const T data) {
-    if (empty()) {
+void Stack<T>::Push(const T data) {
+    if (IsEmpty()) {
         // Stack is not allocated memory
         _stack = (T*)malloc(sizeof(T));
 
@@ -49,13 +85,14 @@ void Stack<T>::push(const T data) {
 
 /**
  * Pop data in stack
+ * 
  * @tparam T : Data type
  */
 template <typename T>
-void Stack<T>::pop() {
+void Stack<T>::Pop() {
     try {
         // Throw exception when accessing null pointer
-        if (empty()) {
+        if (IsEmpty()) {
             throw out_of_range("Stack is empty.");
         }
 
@@ -69,45 +106,8 @@ void Stack<T>::pop() {
         }
     }
     catch (out_of_range& exception) {
-        cout << " - Exception" << endl;
-        cout << exception.what() << endl;
+        cout << " - Exception : " << exception.what() << endl;
     }
-}
-
-
-/**
- * Returns the first stored data in the stack
- * @tparam T : Data type
- * @return First stored data in the stack
- */
-template <typename T>
-int Stack<T>::top() {
-    T data;
-
-    try {
-        // Throw exception when accessing null pointer
-        if (empty()) {
-            throw out_of_range("Stack is empty.");
-        }
-
-        data = *(_stack + _index);
-    }
-    catch (out_of_range& exception) {
-        cout << " - Exception" << endl;
-        cout << exception.what() << endl;
-    }
-
-    return data;
-}
-
-/**
- * Check stack is empty
- * @tparam T : Data type
- * @return Stack is empty or not
- */
-template <typename T>
-bool Stack<T>::empty() {
-    return _index == -1;
 }
 
 int main() {
@@ -116,10 +116,10 @@ int main() {
     bool isLoop = true;
     while (isLoop) {
         cout << "Data structure - Stack(ADT)" << endl;
-        cout << "(1). push()" << endl;
-        cout << "(2). pop()" << endl;
-        cout << "(3). top()" << endl;
-        cout << "(4). empty()" << endl;
+        cout << "(1). Push data" << endl;
+        cout << "(2). Pop data" << endl;
+        cout << "(3). Get top data" << endl;
+        cout << "(4). Check stack is empty" << endl;
         cout << " - Input" << endl;
 
         int index;
@@ -131,18 +131,18 @@ int main() {
 
                 int data;
                 cin >> data;
-                stack.push(data);
+                stack.Push(data);
                 break;
             case 2:
-                stack.pop();
+                stack.Pop();
                 break;
             case 3:
                 cout << " - Output" << endl;
-                cout << stack.top() << endl;
+                cout << stack.GetTop() << endl;
                 break;
             case 4:
                 cout << " - Output" << endl;
-                cout << (stack.empty() ? "True" : "False") << endl;
+                cout << (stack.IsEmpty() ? "True" : "False") << endl;
                 break;
             default:
                 isLoop = false;
