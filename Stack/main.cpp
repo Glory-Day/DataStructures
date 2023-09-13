@@ -15,7 +15,7 @@ public:
      */
     Stack() : _index(-1), _stack(nullptr) { }
 
-    int GetTop();
+    T Top();
     bool IsEmpty();
     void Push(T data);
     void Pop();
@@ -28,13 +28,13 @@ public:
  * @return First stored data in the stack
  */
 template <typename T>
-int Stack<T>::GetTop() {
+T Stack<T>::Top() {
     T data;
 
     try {
         // Throw exception when accessing null pointer
         if (IsEmpty()) {
-            throw out_of_range("Stack is empty.");
+            throw out_of_range("Stack is empty");
         }
 
         data = *(_stack + _index);
@@ -93,7 +93,7 @@ void Stack<T>::Pop() {
     try {
         // Throw exception when accessing null pointer
         if (IsEmpty()) {
-            throw out_of_range("Stack is empty.");
+            throw out_of_range("Stack is empty");
         }
 
         if (_index == 0) {
@@ -118,7 +118,7 @@ int main() {
         cout << "Data structure - Stack(ADT)" << endl;
         cout << "(1). Push data" << endl;
         cout << "(2). Pop data" << endl;
-        cout << "(3). Get top data" << endl;
+        cout << "(3). Get top data in stack" << endl;
         cout << "(4). Check stack is empty" << endl;
         cout << " - Input" << endl;
 
@@ -138,7 +138,7 @@ int main() {
                 break;
             case 3:
                 cout << " - Output" << endl;
-                cout << stack.GetTop() << endl;
+                cout << stack.Top() << endl;
                 break;
             case 4:
                 cout << " - Output" << endl;
