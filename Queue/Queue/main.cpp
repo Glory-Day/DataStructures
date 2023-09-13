@@ -49,7 +49,6 @@ void Queue<T>::Enqueue(T data) {
     }
     catch (out_of_range& exception) {
         cout << " - Exception : " << exception.what() << endl;
-        cout << exception.what() << endl;
     }
 }
 
@@ -63,15 +62,14 @@ void Queue<T>::Dequeue() {
     try {
         // Throw exception when accessing null pointer
         if (IsEmpty()) {
-            throw out_of_range("Queue is empty.");
+            throw out_of_range("Queue is empty");
         }
 
         // Increase queue head index
         _head++;
     }
     catch (out_of_range& exception) {
-        cout << " - Exception" << endl;
-        cout << exception.what() << endl;
+        cout << " - Exception : " << exception.what() << endl;
     }
 }
 
@@ -88,7 +86,7 @@ T Queue<T>::GetFront() {
     try {
         // Throw exception when accessing null pointer
         if (IsEmpty()) {
-            throw out_of_range("Queue is empty.");
+            throw out_of_range("Queue is empty");
         }
 
         data = _queue[_head + 1];
