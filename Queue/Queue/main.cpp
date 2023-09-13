@@ -31,6 +31,42 @@ public:
 };
 
 /**
+ * Returns the first stored data in the queue
+ * 
+ * @tparam T : Data type
+ * @return First stored data in the queue
+ */
+template <typename T>
+T Queue<T>::Front() {
+    T data;
+
+    try {
+        // Throw exception when accessing null pointer
+        if (IsEmpty()) {
+            throw out_of_range("Queue is empty");
+        }
+
+        data = _queue[_head + 1];
+    }
+    catch (out_of_range& exception) {
+        cout << " - Exception : " << exception.what() << endl;
+    }
+
+    return data;
+}
+
+/**
+ * Check queue is empty
+ * 
+ * @tparam T : Data type
+ * @return Queue is empty or not
+ */
+template <typename T>
+bool Queue<T>::IsEmpty() {
+    return _head == _tail;
+}
+
+/**
  * Add data in queue
  * 
  * @tparam T : Data type
@@ -71,42 +107,6 @@ void Queue<T>::Dequeue() {
     catch (out_of_range& exception) {
         cout << " - Exception : " << exception.what() << endl;
     }
-}
-
-/**
- * Returns the first stored data in the queue
- * 
- * @tparam T : Data type
- * @return First stored data in the queue
- */
-template <typename T>
-T Queue<T>::Front() {
-    T data;
-
-    try {
-        // Throw exception when accessing null pointer
-        if (IsEmpty()) {
-            throw out_of_range("Queue is empty");
-        }
-
-        data = _queue[_head + 1];
-    }
-    catch (out_of_range& exception) {
-        cout << " - Exception : " << exception.what() << endl;
-    }
-
-    return data;
-}
-
-/**
- * Check queue is empty
- * 
- * @tparam T : Data type
- * @return Queue is empty or not
- */
-template <typename T>
-bool Queue<T>::IsEmpty() {
-    return _head == _tail;
 }
 
 int main() {
