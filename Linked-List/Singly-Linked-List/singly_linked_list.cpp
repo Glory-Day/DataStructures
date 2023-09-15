@@ -45,7 +45,6 @@ void SinglyLinkedList<T>::Push(T data) {
  * Pop data in front of `Singly Linked List`
  * 
  * @return Check data is popped or not
- * @exception Out of range in linked list
  */
 template <typename T>
 bool SinglyLinkedList<T>::Pop() {
@@ -81,7 +80,6 @@ bool SinglyLinkedList<T>::Pop() {
  * @param index Number of index
  * @param data Data to insert
  * @return Check data is inserted or not
- * @exception Index is out of range in linked list
  */
 template <typename T>
 bool SinglyLinkedList<T>::Insert(int index, T data) {
@@ -123,7 +121,6 @@ bool SinglyLinkedList<T>::Insert(int index, T data) {
  * 
  * @param index Number of index
  * @return Check data is removed or not
- * @exception Index is out of range in linked list
  */
 template <typename T>
 bool SinglyLinkedList<T>::Remove(int index) {
@@ -162,7 +159,7 @@ bool SinglyLinkedList<T>::Remove(int index) {
  * Search data in `Singly Linked List`
  * 
  * @param data Data to search
- * @return If data is found, returns index of node, else returns -1
+ * @return If data is found, returns index of node, else returns `-1`
  */
 template <typename T>
 int SinglyLinkedList<T>::Search(T data) {
@@ -177,7 +174,15 @@ int SinglyLinkedList<T>::Search(T data) {
 }
 
 /**
- * @return Length of nodes in `Singly Linked List`
+ * @return Check linked list is empty or not
+ */
+template <typename T>
+bool SinglyLinkedList<T>::IsEmpty() {
+    return _head->GetNext() == nullptr;
+}
+
+/**
+ * @return Size of nodes in `Singly Linked List`
  */
 template <typename T>
 int SinglyLinkedList<T>::Size() {
@@ -187,14 +192,6 @@ int SinglyLinkedList<T>::Size() {
     }
 
     return size;
-}
-
-/**
- * @return Check linked list is empty or not
- */
-template <typename T>
-bool SinglyLinkedList<T>::IsEmpty() {
-    return _head->GetNext() == nullptr;
 }
 
 /**
