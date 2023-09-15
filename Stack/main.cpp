@@ -8,7 +8,7 @@ int main() {
         std::cout << "Data structure - Stack(ADT)" << std::endl;
         std::cout << "(1). Push data" << std::endl;
         std::cout << "(2). Pop data" << std::endl;
-        std::cout << "(3). Top data" << std::endl;
+        std::cout << "(3). Top data in stack" << std::endl;
         std::cout << "(4). Check stack is empty" << std::endl;
         std::cout << " - Input" << std::endl;
 
