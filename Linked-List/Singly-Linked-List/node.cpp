@@ -1,8 +1,8 @@
 template<typename T>
 class Node {
 private:
-    T _data;     // Data in node
-    Node *_next; // Next linked node pointer
+    T     _data; // Data in node
+    Node* _next; // Next linked node pointer
 
 public:
     /**
@@ -18,9 +18,9 @@ public:
      */
     explicit Node(T data, Node *next) : _data{data}, _next{next} {}
 
-    T GetData();
+    T     GetData();
     Node* GetNext();
-    void SetNext(Node*);
+    void  SetNext(Node*);
 };
 
 template <typename T>
