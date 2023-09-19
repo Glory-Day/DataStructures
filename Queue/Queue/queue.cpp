@@ -4,10 +4,10 @@
 template <typename T>
 class Queue {
 private:
-    int _size; // Number of queue memory size
-    int _head; // Head of queue index
-    int _tail; // Tail of queue index
-    T* _queue; // Queue where data is stored
+    int _size;  // Number of queue memory size
+    int _head;  // Head of queue index
+    int _tail;  // Tail of queue index
+    T*  _queue; // Queue where data is stored
 
 public:
     /**
@@ -22,7 +22,7 @@ public:
      */
     explicit Queue(const int size) : _size(size), _head(-1), _tail(-1), _queue((T*)calloc(size,sizeof(T))) {}
 
-    T Front();
+    T    Front();
     bool IsEmpty();
     void Enqueue(T data);
     void Dequeue();
