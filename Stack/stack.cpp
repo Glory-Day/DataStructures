@@ -13,7 +13,7 @@ public:
      */
     Stack() : _index(-1), _stack(nullptr) { }
 
-    T Top();
+    T    Top();
     bool IsEmpty();
     void Push(T data);
     void Pop();
