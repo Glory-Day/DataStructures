@@ -16,9 +16,9 @@ public:
     bool Pop();
     bool Insert(int, T);
     bool Remove(int);
-    int Search(T);
+    int  Search(T);
     bool IsEmpty();
-    int Size();
+    int  Size();
     void Clear();
 };
 
