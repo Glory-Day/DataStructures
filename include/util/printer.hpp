@@ -25,6 +25,7 @@ public:
     void print_input();
     void print_output();
     void print_sucess();
+    void print_exception(const std::string& message);
     void print_finish();
 };
 
@@ -60,8 +61,12 @@ inline void Printer::print_sucess() {
     std::cout << set_color(Foreground::Green) << "[OK    ]" << COLOR_RESET << std::endl;
 }
 
+inline void Printer::print_exception(const std::string& message) {
+    std::cout << set_color(Foreground::Red) << "[ERROR ] " << message << COLOR_RESET << std::endl;
+}
+
 inline void Printer::print_finish() {
-    std::cout << set_color(Foreground::Red) << "[FINISH]" << COLOR_RESET << std::endl;
+    std::cout << set_color(Foreground::Red) << "[FINISH] " << COLOR_RESET << std::endl;
     std::cout << std::endl;
 }
 
