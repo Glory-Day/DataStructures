@@ -31,23 +31,35 @@ int main() {
 
                 int data;
                 cin >> data;
-                stack.Push(data);
+                stack.push(data);
 
                 break;
             case 2:
-                stack.Pop();
+                try {
+                    stack.pop();
+                }
+                catch (out_of_range& exception) {
+                    printer.print_exception(exception.what());
+                }
 
                 break;
             case 3:
-                printer.print_output();
+                try {
+                    int data = stack.top();
 
-                cout << stack.Top() << endl;
+                    printer.print_output();
+
+                    cout << data << endl;
+                }
+                catch (out_of_range& exception) {
+                    printer.print_exception(exception.what());
+                }
 
                 break;
             case 4:
                 printer.print_output();
 
-                cout << (stack.IsEmpty() ? "TRUE" : "FALSE") << endl;
+                cout << (stack.empty() ? "TRUE" : "FALSE") << endl;
 
                 break;
             default:

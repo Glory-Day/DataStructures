@@ -5,20 +5,31 @@ template<typename T>
 class Stack {
 private:
     int _index;     // Current index number of the stack;
+    int _capacity;
+
     T*  _container; // Container where data is stored
 
-public:
-    /**
-     * `Stack` default constructor
-     */
-    Stack() : _index(-1), _container(nullptr) { }
+    void reserve(const int capacity);
 
-    const T Top();
+public:
+    Stack(int capacity = 1) : _index(-1), _capacity(capacity), _container(nullptr) {
+        reserve(capacity);
+    }
+
+    ~Stack() {
+        if (_container != nullptr) {
+            delete[] _container;
+        }
+    }
+
+    int size() const;
+
+    T& top() const;
     
-    const bool IsEmpty();
+    bool empty() const;
           
-    void Push(const T data);
-    void Pop();
+    void push(const T& value);
+    void pop();
 };
 
 #endif
