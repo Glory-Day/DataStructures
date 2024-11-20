@@ -6,27 +6,30 @@
 using namespace std;
 
 template<typename T>
-int Stack<T>::size() const {
+int Stack<T>::size() const
+{
     return _index + 1;
 }
 
 template<typename T>
-void Stack<T>::reserve(const int capacity) {
-    T* caches = new T[capacity];
+void Stack<T>::reserve(int capacity)
+{
+    T* container = new T[capacity];
     
-    memcpy(caches, _container, sizeof(T) * size());
+    memcpy(container, _container, sizeof(T) * size());
 
-    _container = caches;
+    _container = container;
     _capacity = capacity;
 }
 
 /**
  * @return First stored data in `stack`
  */
-template <typename T>
-T& Stack<T>::top() const {
+template<typename T>
+T& Stack<T>::top() const
+{
     // Throw exception when accessing null pointer
-    if (empty()) {
+    if (empty() == true) {
         throw out_of_range("STACK IS EMPTY");
     }
 
@@ -36,8 +39,9 @@ T& Stack<T>::top() const {
 /**
  * @return Check stack is empty or not
  */
-template <typename T>
-bool Stack<T>::empty() const {
+template<typename T>
+bool Stack<T>::empty() const
+{
     return _index == -1;
 }
 
@@ -46,22 +50,33 @@ bool Stack<T>::empty() const {
  *
  * @param data : Data to push
  */
-template <typename T>
-void Stack<T>::push(const T& value) {
-    reserve(_index + 1);
+template<typename T>
+void Stack<T>::push(const T& data)
+{
+    if (size() == _capacity)
+    {
+        reserve(_capacity * 2);
+    }
 
-    *(_container + ++_index) = value;
+    *(_container + ++_index) = data;
 }
 
 /**
  * Pop data in `stack`
  */
-template <typename T>
-void Stack<T>::pop() {
+template<typename T>
+void Stack<T>::pop()
+{
     // Throw exception when accessing null pointer
-    if (empty()) {
+    if (empty() == true)
+    {
         throw out_of_range("STACK IS EMPTY");
     }
 
-    _index--;    
+    _index--;
+
+    if (size() == _capacity / 2)
+    {
+        reserve(_capacity / 2);
+    }    
 }

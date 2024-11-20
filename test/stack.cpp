@@ -1,78 +1,107 @@
 #include <iostream>
-
-#include "util\printer.hpp"
+#include <string>
 
 #include "stack.hpp"
 #include "stack\stack.cpp"
 
-using namespace std;
+#include "test\terminal\unit.hpp"
 
-int main() {
+using namespace std;
+using namespace test::terminal;
+
+int main()
+{
+    Unit unit("Data Structure Test - Stack(ADT)");
+    unit.add("push(data)");
+    unit.add("pop()");
+    unit.add("top()");
+    unit.add("empty()");
+
     Stack<int> stack = Stack<int>();
 
-    Printer printer("Data Structure Test - Stack(ADT)");
-    printer.append("Push Data");
-    printer.append("Pop Data");
-    printer.append("Top Data in Stack");
-    printer.append("Check Stack Is Empty");
-
-    printer.print_subject();
+    unit.print();
 
     bool isLoop = true;
-    while (isLoop == true) {
-        printer.print_order();
+    while (isLoop == true)
+    {
+        unit.print_command_block();
 
         int index;
         cin >> index;
 
-        switch (index) {
+        switch (index)
+        {
             case 1:
-                printer.print_input();
+            {
+                unit.print_input_block();
 
                 int data;
                 cin >> data;
+
                 stack.push(data);
 
                 break;
+            }
             case 2:
-                try {
+            {
+                try
+                {
                     stack.pop();
                 }
-                catch (out_of_range& exception) {
-                    printer.print_exception(exception.what());
+                catch (const out_of_range& exception)
+                {
+                    unit.print_exception_block(exception.what());
                 }
 
                 break;
+            }
             case 3:
-                try {
-                    int data = stack.top();
+            {
+                try
+                {
+                    int output = stack.top();
 
-                    printer.print_output();
+                    unit.print_output_block();
 
-                    cout << data << endl;
+                    cout << output << endl;
                 }
-                catch (out_of_range& exception) {
-                    printer.print_exception(exception.what());
+                catch (const out_of_range& exception)
+                {
+                    unit.print_exception_block(exception.what());
                 }
 
                 break;
+            }
             case 4:
-                printer.print_output();
+            {
+                string output = (stack.empty() ? "TRUE" : "FALSE");
 
-                cout << (stack.empty() ? "TRUE" : "FALSE") << endl;
+                unit.print_output_block();
+
+                cout << output << endl;
 
                 break;
+            }
             default:
+            {
                 isLoop = false;
 
                 break;
+            }
         }
 
-        if (isLoop) {
-            printer.print_sucess();
+        if (isLoop)
+        {
+            unit.print_sucess_block();
         }
-        else {
-            printer.print_finish();
+        else
+        {
+            unit.print_finish_block();
         }
+
+        cin.clear();
+        cin.ignore();
     }
+
+    return 0;
 }

@@ -5,20 +5,25 @@ template<typename T>
 class Stack {
 private:
     int _index;     // Current index number of the stack;
-    int _capacity;
 
     T*  _container; // Container where data is stored
+    int _capacity;  // 
 
-    void reserve(const int capacity);
+    void reserve(int capacity);
 
 public:
-    Stack(int capacity = 1) : _index(-1), _capacity(capacity), _container(nullptr) {
-        reserve(capacity);
+    Stack(int capacity = 1) : _index(-1), _capacity(capacity), _container(nullptr) 
+    {
+        _container = new T[capacity];
     }
 
-    ~Stack() {
-        if (_container != nullptr) {
+    ~Stack()
+    {
+        if (_container != nullptr)
+        {
             delete[] _container;
+
+            _container = nullptr;
         }
     }
 
@@ -28,7 +33,7 @@ public:
     
     bool empty() const;
           
-    void push(const T& value);
+    void push(const T& data);
     void pop();
 };
 
