@@ -1,31 +1,38 @@
 #ifndef __QUEUE_HPP__
 #define __QUEUE_HPP__
 
-template <typename T>
+#define QUEUE
+
+#include "node.hpp"
+
+template<typename T>
 class Queue {
 private:
-    int _size;  // Number of queue memory size
-    int _head;  // Head of queue index
-    int _tail;  // Tail of queue index
-    T*  _queue; // Queue where data is stored
+    Node<T>* _begin; // Head of linked list.
+    Node<T>* _end;   // Tail of linked list.
+
+    int _size;
 
 public:
-    /**
-     * `Queue` default constructor
-     */
-    Queue() : _size(0), _head(-1), _tail(-1), _queue(nullptr) {}
+    Queue() : _begin{nullptr}, _end{nullptr}, _size(0) {}
 
-    /**
-     * `Queue` constructor to allocate queue memory
-     * 
-     * @param size : Size of allocating queue memory
-     */
-    explicit Queue(const int size) : _size(size), _head(-1), _tail(-1), _queue((T*)calloc(size,sizeof(T))) {}
+    ~Queue()
+    {
+        while (empty() == false)
+        {
+            dequeue();
+        }
 
-    T    Front();
-    bool IsEmpty();
-    void Enqueue(T data);
-    void Dequeue();
+        delete _begin;
+        
+        _begin = nullptr;
+        _end = nullptr;
+    }
+
+    void enqueue(T data);
+    void dequeue();
+    T    front();
+    bool empty();
 };
 
 #endif

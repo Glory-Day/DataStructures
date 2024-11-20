@@ -1,46 +1,105 @@
 #include <iostream>
+#include <string>
 
 #include "queue.hpp"
 #include "queue\queue\queue.cpp"
 
-int main() {
-    Queue<int> queue = Queue<int>(10);
+#include "test\terminal\unit.hpp"
+
+using namespace std;
+using namespace test::terminal;
+
+int main()
+{
+    Unit unit("Data Structure Test - Queue(ADT)");
+    unit.add("enqueue(data)");
+    unit.add("dequeue()");
+    unit.add("front()");
+    unit.add("empty()");
+
+    Queue<int> queue = Queue<int>();
+
+    unit.print();
 
     bool isLoop = true;
-    while (isLoop) {
-        std::cout << "Data structure - Queue(ADT)" << std::endl;
-        std::cout << "(1). Enqueue" << std::endl;
-        std::cout << "(2). Dequeue" << std::endl;
-        std::cout << "(3). Front data in queue" << std::endl;
-        std::cout << "(4). Check queue is empty" << std::endl;
-        std::cout << " - Input" << std::endl;
+    while (isLoop)
+    {
+        unit.print_command_block();
 
-        int index;
-        std::cin >> index;
+        int command;
+        cin >> command;
 
-        switch (index) {
+        switch (command)
+        {
             case 1:
+            {
+                unit.print_input_block();
+
                 int data;
-                std::cout << " - Input" << std::endl;
-                std::cin >> data;
-                queue.Enqueue(data);
+                cin >> data;
+                
+                queue.enqueue(data);
+                
                 break;
+            }
             case 2:
-                queue.Dequeue();
+            {
+                try
+                {
+                    queue.dequeue();
+                }
+                catch (const out_of_range& exception)
+                {
+                    unit.print_exception_block(exception.what());
+                }
+
                 break;
+            }
             case 3:
-                std::cout << " - Output" << std::endl;
-                std::cout << queue.Front() << std::endl;
+            {
+                try
+                {
+                    int output = queue.front();
+
+                    unit.print_output_block();
+
+                    cout << output << endl;
+                }
+                catch (const out_of_range& exception)
+                {
+                    unit.print_exception_block(exception.what());
+                }
+
                 break;
+            }
             case 4:
-                std::cout << " - Output" << std::endl;
-                std::cout << (queue.IsEmpty() ? "True" : "False") << std::endl;
+            {
+                string output = (queue.empty() ? "TRUE" : "FALSE");
+                
+                unit.print_output_block();
+
+                cout << output << endl;
+
                 break;
+            }
             default:
+            {
                 isLoop = false;
+
                 break;
+            }
         }
 
-        std::cout << std::endl;
+        if (isLoop)
+        {
+            unit.print_sucess_block();
+        }
+        else
+        {
+            unit.print_finish_block();
+        }
+
+        cin.clear();
+        cin.ignore();
     }
 }

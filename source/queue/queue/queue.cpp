@@ -4,71 +4,78 @@
 #include "queue.hpp"
 
 /**
- * @return First stored data in `queue`
- */
-template <typename T>
-T Queue<T>::Front() {
-    T data;
-
-    try {
-        // Throw exception when accessing null pointer
-        if (IsEmpty()) {
-            throw std::out_of_range("Queue is empty");
-        }
-
-        data = _queue[_head + 1];
-    }
-    catch (std::out_of_range& exception) {
-        std::cout << " - Exception : " << exception.what() << std::endl;
-    }
-
-    return data;
-}
-
-/**
- * @return Check queue is empty or not
- */
-template <typename T>
-bool Queue<T>::IsEmpty() {
-    return _head == _tail;
-}
-
-/**
  * Push data in `queue`
  *
  * @param data : Data to push
  */
-template <typename T>
-void Queue<T>::Enqueue(T data) {
-    try {
-        // Throw exception when accessing null pointer
-        if (_tail == _size - 1) {
-            throw std::out_of_range("Queue is full");
-        }
+template<typename T>
+void Queue<T>::enqueue(T data)
+{
+    Node<T>* node = new Node(data);
 
-        // Store data
-        _queue[++_tail] = data;
+    if (empty())
+    {
+        _begin = _end = node;
     }
-    catch (std::out_of_range& exception) {
-        std::cout << " - Exception : " << exception.what() << std::endl;
+    else
+    {
+        _end->set_next_node(node);
+        _end = _end->get_next_node();
     }
+
+    _size++;
 }
 
 /**
  * Pop data in `queue`
  */
-template <typename T>
-void Queue<T>::Dequeue() {
-    try {
-        // Throw exception when accessing null pointer
-        if (IsEmpty()) {
-            throw std::out_of_range("Queue is empty");
-        }
+template<typename T>
+void Queue<T>::dequeue()
+{
+    // Throw exception when accessing null pointer
+    if (empty())
+    {
+        throw out_of_range("QUEUE IS EMPTY");
+    }
 
-        // Increase index of head
-        _head++;
+    if (_size == 1)
+    {
+        delete _begin;
+
+        _begin = _end = nullptr;
     }
-    catch (std::out_of_range& exception) {
-        std::cout << " - Exception : " << exception.what() << std::endl;
+    else
+    {
+        Node<T>* next = _begin->get_next_node();
+
+        delete _begin;
+
+        _begin = next;
     }
+
+    _size--;
+}
+
+/**
+ * @return First stored data in `queue`
+ */
+template<typename T>
+T Queue<T>::front()
+{
+    // Throw exception when accessing null pointer
+    if (empty())
+    {
+        throw out_of_range("QUEUE IS EMPTY");
+    }
+
+    return _begin->get_data();
+}
+
+/**
+ * @return Check queue is empty or not
+ */
+template<typename T>
+bool Queue<T>::empty()
+{
+    return _begin == nullptr && _end == nullptr;
 }
