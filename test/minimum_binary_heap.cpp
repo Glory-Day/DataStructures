@@ -1,7 +1,7 @@
 #include <iostream>
 
 #include "minimum_binary_heap.hpp"
-#include "tree\binary_heap\minimum_binary_heap\minimum_binary_heap.cpp"
+#include "heap\binary_heap\minimum_binary_heap\minimum_binary_heap.cpp"
 
 #include "test\terminal\unit.hpp"
 

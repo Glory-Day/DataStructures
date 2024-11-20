@@ -1,7 +1,7 @@
 #include <iostream>
 
 #include "maximum_binary_heap.hpp"
-#include "tree\binary_heap\maximum_binary_heap\maximum_binary_heap.cpp"
+#include "heap\binary_heap\maximum_binary_heap\maximum_binary_heap.cpp"
 
 #include "test\terminal\unit.hpp"
 
