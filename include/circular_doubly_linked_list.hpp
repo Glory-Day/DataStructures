@@ -1,7 +1,7 @@
-#ifndef __SINGLY_LINKED_LIST_HPP__
-#define __SINGLY_LINKED_LIST_HPP__
+#ifndef __CIRCULAR_DOUBLY_LINKED_LIST_HPP__
+#define __CIRCULAR_DOUBLY_LINKED_LIST_HPP__
 
-#define SINGLY_LINKED_LIST
+#define DOUBLY_LINKED_LIST
 
 #include <string>
 
@@ -10,7 +10,8 @@
 using namespace std;
 
 template<typename T>
-class SinglyLinkedList {
+class CircularDoublyLinkedList
+{
 private:
     Node<T>* _begin; // Head of linked list.
     Node<T>* _end;   // Tail of linked list.
@@ -18,9 +19,9 @@ private:
     int _size;
 
 public:
-    SinglyLinkedList() : _begin{nullptr}, _end{nullptr}, _size(0) {}
+    CircularDoublyLinkedList() : _begin{nullptr}, _end{nullptr}, _size(0) {}
 
-    ~SinglyLinkedList()
+    ~CircularDoublyLinkedList()
     {
         clear();
 
@@ -39,7 +40,7 @@ public:
     int  size();
     void clear();
 
-    string display();
+    vector<string> display(int);
 };
 
 #endif

@@ -1,7 +1,9 @@
 #include <iostream>
+#include <string>
+#include <vector>
 
-#include "singly_linked_list.hpp"
-#include "linked_list\singly_linked_list\singly_linked_list.cpp"
+#include "circular_doubly_linked_list.hpp"
+#include "linked_list\circular_doubly_linked_list\circular_doubly_linked_list.cpp"
 
 #include "test\terminal\unit.hpp"
 
@@ -10,7 +12,7 @@ using namespace test::terminal;
 
 int main()
 {
-    Unit unit("Data Structure Test - Singly Linked List(ADT)");
+    Unit unit("Data Structure Test - Circular Doubly Linked List(ADT)");
     unit.add("push(data)");
     unit.add("pop()");
     unit.add("insert(index, data)");
@@ -19,9 +21,9 @@ int main()
     unit.add("size()");
     unit.add("empty()");
     unit.add("clear()");
-    unit.add("display()");
+    unit.add("display(count)");
 
-    SinglyLinkedList<int> linked_list = SinglyLinkedList<int>();
+    CircularDoublyLinkedList<int> linked_list = CircularDoublyLinkedList<int>();
 
     unit.print();
 
@@ -145,11 +147,18 @@ int main()
             }
             case 9:
             {
-                string output = linked_list.display();
+                unit.print_input_block();
 
-                unit.print_output_block();
+                int count;
+                cin >> count;
 
-                cout << output << endl;
+                vector<string> output = linked_list.display(count);
+                for (int i = 0; i < (int)output.size(); i++)
+                {
+                    unit.print_output_block();
+
+                    cout << output[i] << endl;
+                }
 
                 break;
             }

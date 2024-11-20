@@ -6,4 +6,6 @@ file(GLOB SOURCES *.cpp)
 
 add_library(${PROJECT_NAME} OBJECT ${SOURCES})
 
-target_link_directories(${PROJECT_NAME} PUBLIC ${CMAKE_SOURCE_DIR}/include)
+include_directories(${CMAKE_SOURCE_DIR}/include)
+
+target_compile_options(${PROJECT_NAME} PRIVATE -Wall -Werror)

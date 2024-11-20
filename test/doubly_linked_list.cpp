@@ -1,7 +1,9 @@
 #include <iostream>
+#include <string>
+#include <vector>
 
-#include "singly_linked_list.hpp"
-#include "linked_list\singly_linked_list\singly_linked_list.cpp"
+#include "doubly_linked_list.hpp"
+#include "linked_list\doubly_linked_list\doubly_linked_list.cpp"
 
 #include "test\terminal\unit.hpp"
 
@@ -10,7 +12,7 @@ using namespace test::terminal;
 
 int main()
 {
-    Unit unit("Data Structure Test - Singly Linked List(ADT)");
+    Unit unit("Data Structure Test - Doubly Linked List(ADT)");
     unit.add("push(data)");
     unit.add("pop()");
     unit.add("insert(index, data)");
@@ -21,7 +23,7 @@ int main()
     unit.add("clear()");
     unit.add("display()");
 
-    SinglyLinkedList<int> linked_list = SinglyLinkedList<int>();
+    DoublyLinkedList<int> linked_list = DoublyLinkedList<int>();
 
     unit.print();
 
@@ -145,11 +147,13 @@ int main()
             }
             case 9:
             {
-                string output = linked_list.display();
+                vector<string> output = linked_list.display();
+                for (int i = 0; i < (int)output.size(); i++)
+                {
+                    unit.print_output_block();
 
-                unit.print_output_block();
-
-                cout << output << endl;
+                    cout << output[i] << endl;
+                }
 
                 break;
             }

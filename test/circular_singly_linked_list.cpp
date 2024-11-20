@@ -1,7 +1,7 @@
 #include <iostream>
 
-#include "singly_linked_list.hpp"
-#include "linked_list\singly_linked_list\singly_linked_list.cpp"
+#include "circular_singly_linked_list.hpp"
+#include "linked_list\circular_singly_linked_list\circular_singly_linked_list.cpp"
 
 #include "test\terminal\unit.hpp"
 
@@ -10,7 +10,7 @@ using namespace test::terminal;
 
 int main()
 {
-    Unit unit("Data Structure Test - Singly Linked List(ADT)");
+    Unit unit("Data Structure Test - Circular Singly Linked List(ADT)");
     unit.add("push(data)");
     unit.add("pop()");
     unit.add("insert(index, data)");
@@ -19,9 +19,9 @@ int main()
     unit.add("size()");
     unit.add("empty()");
     unit.add("clear()");
-    unit.add("display()");
+    unit.add("display(count)");
 
-    SinglyLinkedList<int> linked_list = SinglyLinkedList<int>();
+    CircularSinglyLinkedList<int> linked_list = CircularSinglyLinkedList<int>();
 
     unit.print();
 
@@ -145,7 +145,12 @@ int main()
             }
             case 9:
             {
-                string output = linked_list.display();
+                unit.print_input_block();
+
+                int count;
+                cin >> count;
+
+                string output = linked_list.display(count);
 
                 unit.print_output_block();
 

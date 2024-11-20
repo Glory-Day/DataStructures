@@ -1,5 +1,5 @@
-#ifndef __SINGLY_LINKED_LIST_HPP__
-#define __SINGLY_LINKED_LIST_HPP__
+#ifndef __CIRCULAR_SINGLY_LINKED_LIST_HPP__
+#define __CIRCULAR_SINGLY_LINKED_LIST_HPP__
 
 #define SINGLY_LINKED_LIST
 
@@ -10,7 +10,8 @@
 using namespace std;
 
 template<typename T>
-class SinglyLinkedList {
+class CircularSinglyLinkedList
+{
 private:
     Node<T>* _begin; // Head of linked list.
     Node<T>* _end;   // Tail of linked list.
@@ -18,9 +19,9 @@ private:
     int _size;
 
 public:
-    SinglyLinkedList() : _begin{nullptr}, _end{nullptr}, _size(0) {}
+    CircularSinglyLinkedList() : _begin{nullptr}, _end{nullptr}, _size(0) {}
 
-    ~SinglyLinkedList()
+    ~CircularSinglyLinkedList()
     {
         clear();
 
@@ -39,7 +40,7 @@ public:
     int  size();
     void clear();
 
-    string display();
+    string display(int);
 };
 
 #endif
