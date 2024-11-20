@@ -10,3 +10,5 @@ add_subdirectory(linked_list/circular_doubly_linked_list)
 
 add_subdirectory(tree/binary_heap/maximum_heap)
 add_subdirectory(tree/binary_heap/minimum_heap)
+
+add_subdirectory(hash_table)
