@@ -3,12 +3,58 @@
 
 #include "maximum_heap.hpp"
 
+using namespace std;
+
+template<typename T>
+void MaximumHeap<T>::reserve(int capacity)
+{
+    _capacity = capacity;
+
+    T* root = new T[capacity];
+    for (int i = 0; i < _size; i++)
+    {
+        root[i] = _root[i];
+    }
+
+    delete[] _root;
+
+    _root = root;
+}
+
+template<typename T>
+void MaximumHeap<T>::push_back(T data)
+{
+    if (_size == _capacity)
+    {
+        reserve(_capacity * 2);
+    }
+
+    _root[_size++] = data;
+}
+
+template<typename T>
+void MaximumHeap<T>::pop_back()
+{
+    if (_size == 0)
+    {
+        throw new out_of_range("HEAP IS EMPTY");
+    }
+
+    _size--;
+    
+    if (_size == _capacity / 2)
+    {
+        reserve(_capacity / 2);
+    }
+}
+
 /**
  * @param index Index number of node
  * @return Get index number of parent node
  */
 template <typename T>
-int MaximumHeap<T>::GetParentIndex(int index) {
+int MaximumHeap<T>::get_parent_index(int index)
+{
     return (index - 1) / 2;
 }
 
@@ -17,7 +63,8 @@ int MaximumHeap<T>::GetParentIndex(int index) {
  * @return Get index number of left child node
  */
 template <typename T>
-int MaximumHeap<T>::GetLeftChildIndex(int index) {
+int MaximumHeap<T>::get_left_child_index(int index)
+{
     return index * 2 + 1;
 }
 
@@ -26,7 +73,8 @@ int MaximumHeap<T>::GetLeftChildIndex(int index) {
  * @return Get index number of right child node
  */
 template <typename T>
-int MaximumHeap<T>::GetRightChildIndex(int index) {
+int MaximumHeap<T>::get_right_child_index(int index)
+{
     return index * 2 + 2;
 }
 
@@ -36,21 +84,29 @@ int MaximumHeap<T>::GetRightChildIndex(int index) {
  * @param index Index number of node
  */
 template <typename T>
-void MaximumHeap<T>::Heapify(int index) {
-    int leftChildIndex = GetLeftChildIndex(index);
-    int rightChildIndex = GetRightChildIndex(index);
+void MaximumHeap<T>::heapify(int index)
+{
+    while (get_left_child_index(index) < _size - 1)
+    {
+        int left_child_index = get_left_child_index(index);
+        int right_child_index = get_right_child_index(index);
 
-    int updatedIndex = index;
-    if (leftChildIndex < _size && _head[updatedIndex] < _head[leftChildIndex]) {
-        updatedIndex = leftChildIndex;
-    }
-    if (rightChildIndex < _size && _head[updatedIndex] < _head[rightChildIndex]) {
-        updatedIndex = rightChildIndex;
-    }
+        int updated_index = get_left_child_index(index);
+        if (right_child_index < _size && _root[left_child_index] < _root[right_child_index])
+        {
+            updated_index = right_child_index;
+        }
 
-    if (updatedIndex != index) {
-        std::swap(_head[index], _head[updatedIndex]);
-        Heapify(updatedIndex);
+        if (_root[updated_index] < _root[index] || _root[updated_index] == _root[index])
+        {
+            break;
+        }
+        else
+        {
+            swap(_root[index], _root[updated_index]);
+
+            index = updated_index;
+        }
     }
 }
 
@@ -58,19 +114,14 @@ void MaximumHeap<T>::Heapify(int index) {
  * @return Get data from `Maximum Heap`
  */
 template <typename T>
-T MaximumHeap<T>::Top() {
-    try {
-        if (_size <= 0) {
-            throw std::out_of_range("Maximum heap is empty.");
-        }
-
-        return _head[0];
-    }
-    catch (std::out_of_range& exception) {
-        std::cout << " - Exception : " << exception.what() << std::endl;
+T MaximumHeap<T>::top()
+{
+    if (_size == 0)
+    {
+        throw out_of_range("HEAP IS EMPTY");
     }
 
-    return -1;
+    return _root[0];
 }
 
 /**
@@ -79,22 +130,16 @@ T MaximumHeap<T>::Top() {
  * @param data : New data
  */
 template <typename T>
-void MaximumHeap<T>::Insert(T data) {
-    try {
-        if (_size == _capacity) {
-            throw std::out_of_range("Maximize heap is full.");
-        }
+void MaximumHeap<T>::insert(T data)
+{
+    push_back(data);
 
-        int index = ++_size - 1;
-        _head[index] = data;
-
-        while (index != 0 && _head[GetParentIndex(index)] > _head[index]) {
-            std::swap(_head[index], _head[GetParentIndex(index)]);
-            index = GetParentIndex(index);
-        }
-    }
-    catch (std::out_of_range& exception) {
-        std::cout << " - Exception : " << exception.what() << std::endl;
+    int index = _size - 1;
+    while (index != 0 && _root[get_parent_index(index)] < _root[index])
+    {
+        swap(_root[index], _root[get_parent_index(index)]);
+        
+        index = get_parent_index(index);
     }
 }
 
@@ -102,22 +147,11 @@ void MaximumHeap<T>::Insert(T data) {
  * Remove data from `Maximum Heap`
  */
 template <typename T>
-void MaximumHeap<T>::Extract() {
-    try {
-        if (_size <= 0) {
-            throw std::out_of_range("Maximum heap is empty.");
-        }
+void MaximumHeap<T>::extract()
+{
+    swap(_root[0], _root[_size - 1]);
+    
+    pop_back();
 
-        if (_size == 1) {
-            _size--;
-            return;
-        }
-
-        _head[0] = _head[_size - 1];
-        _size--;
-        Heapify(0);
-    }
-    catch (std::out_of_range& exception) {
-        std::cout << " - Exception : " << exception.what() << std::endl;
-    }
+    heapify(0);
 }

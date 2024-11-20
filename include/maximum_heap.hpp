@@ -1,30 +1,30 @@
 #ifndef __MAXIMUM_HEAP_HPP__
 #define __MAXIMUM_HEAP_HPP__
 
-template <typename T>
-class MaximumHeap {
+template<typename T>
+class MaximumHeap
+{
 private:
-    T*  _head;     // Head of elements
+    T*  _root;     // Head of elements
     int _capacity; // Maximum possible size
     int _size;     // Current index number of elements
 
-    void Heapify(int);
+    void reserve(int);
+    void push_back(T);
+    void pop_back();
 
-    int GetParentIndex(int);
-    int GetLeftChildIndex(int);
-    int GetRightChildIndex(int);
+    void heapify(int);
+
+    int get_parent_index(int);
+    int get_left_child_index(int);
+    int get_right_child_index(int);
 
 public:
-    /**
-     * `Maximum Heap` default constructor
-     * 
-     * @param capacity Maximum possible size
-     */
-    explicit MaximumHeap(int capacity) : _head{new T[capacity]}, _capacity{capacity}, _size{0} {}
+    explicit MaximumHeap() : _root{new T[1]}, _capacity{1}, _size{0} {}
 
-    T Top();
-    void Insert(T);
-    void Extract();
+    void insert(T);
+    void extract();
+    T    top();
 };
 
 #endif

@@ -3,39 +3,91 @@
 #include "minimum_heap.hpp"
 #include "tree\binary_heap\minimum_heap\minimum_heap.cpp"
 
-int main() {
-    MinimumHeap<int> heap = MinimumHeap<int>(10);
+#include "test\terminal\unit.hpp"
+
+using namespace std;
+using namespace test::terminal;
+
+int main()
+{
+    Unit unit("Data Structure Test - Minimum Heap(ADT)");
+    unit.add("insert(data)");
+    unit.add("extract()");
+    unit.add("top()");
+
+    MinimumHeap<int> heap = MinimumHeap<int>();
+
+    unit.print();
 
     bool isLoop = true;
-    while (isLoop) {
-        std::cout << "Data structure - Minimum Heap(ADT)" << std::endl;
-        std::cout << "(1). Insert data" << std::endl;
-        std::cout << "(2). Extract data" << std::endl;
-        std::cout << "(3). Get data from minimum heap" << std::endl;
-        std::cout << " - Input" << std::endl;
+    while (isLoop)
+    {
+        unit.print_command_block();
 
-        int index;
-        std::cin >> index;
+        int command;
+        cin >> command;
 
-        int data;
-        switch (index) {
+        switch (command)
+        {
             case 1:
-                std::cout << " - Input" << std::endl;
-                std::cin >> data;
-                heap.Insert(data);
+            {
+                unit.print_input_block();
+
+                int data;
+                cin >> data;
+
+                heap.insert(data);
+
                 break;
+            }
             case 2:
-                heap.Extract();
+            {
+                try
+                {
+                    heap.extract();
+                }
+                catch (const out_of_range& exception)
+                {
+                    unit.print_exception_block(exception.what());
+                }
+
                 break;
+            }
             case 3:
-                std::cout << " - Output" << std::endl;
-                std::cout << heap.Top() << std::endl;
+            {
+                try
+                {
+                    int output = heap.top();
+
+                    unit.print_output_block();
+
+                    cout << output << endl;
+                }
+                catch (const out_of_range& exception)
+                {
+                    unit.print_exception_block(exception.what());
+                }
+
                 break;
+            }
             default:
+            {
                 isLoop = false;
+
                 break;
+            }
         }
 
-        std::cout << std::endl;
+        if (isLoop)
+        {
+            unit.print_sucess_block();
+        }
+        else
+        {
+            unit.print_finish_block();
+        }
+
+        cin.clear();
+        cin.ignore();
     }
 }
