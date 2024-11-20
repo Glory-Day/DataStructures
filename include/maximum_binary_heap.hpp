@@ -1,8 +1,8 @@
-#ifndef __MINIMUM_HEAP_HPP__
-#define __MINIMUM_HEAP_HPP__
+#ifndef __MAXIMUM_BINARY_HEAP_HPP__
+#define __MAXIMUM_BINARY_HEAP_HPP__
 
 template<typename T>
-class MinimumHeap
+class MaximumBinaryHeap
 {
 private:
     T*  _root;     // Head of elements
@@ -20,7 +20,7 @@ private:
     int get_right_child_index(int);
 
 public:
-    explicit MinimumHeap() : _root{new T[1]}, _capacity{1}, _size{0} {}
+    explicit MaximumBinaryHeap() : _root{new T[1]}, _capacity{1}, _size{0} {}
 
     void insert(T);
     void extract();

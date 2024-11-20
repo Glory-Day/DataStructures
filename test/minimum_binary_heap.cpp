@@ -1,7 +1,7 @@
 #include <iostream>
 
-#include "maximum_heap.hpp"
-#include "tree\binary_heap\maximum_heap\maximum_heap.cpp"
+#include "minimum_binary_heap.hpp"
+#include "tree\binary_heap\minimum_binary_heap\minimum_binary_heap.cpp"
 
 #include "test\terminal\unit.hpp"
 
@@ -10,12 +10,12 @@ using namespace test::terminal;
 
 int main()
 {
-    Unit unit("Data Structure Test - Maximum Heap(ADT)");
+    Unit unit("Data Structure Test - Minimum Binary Heap(ADT)");
     unit.add("insert(data)");
     unit.add("extract()");
     unit.add("top()");
 
-    MaximumHeap<int> heap = MaximumHeap<int>();
+    MinimumBinaryHeap<int> heap = MinimumBinaryHeap<int>();
 
     unit.print();
 

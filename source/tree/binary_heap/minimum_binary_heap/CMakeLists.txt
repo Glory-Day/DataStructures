@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.8)
 
-project(maximum_heap VERSION 0.1.0 LANGUAGES CXX)
+project(minimum_binary_heap VERSION 0.1.0 LANGUAGES C CXX)
 
 file(GLOB SOURCES *.cpp)
 

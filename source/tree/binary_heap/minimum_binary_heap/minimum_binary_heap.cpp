@@ -1,12 +1,12 @@
 #include <iostream>
 #include <algorithm>
 
-#include "minimum_heap.hpp"
+#include "minimum_binary_heap.hpp"
 
 using namespace std;
 
 template<typename T>
-void MinimumHeap<T>::reserve(int capacity)
+void MinimumBinaryHeap<T>::reserve(int capacity)
 {
     _capacity = capacity;
 
@@ -22,7 +22,7 @@ void MinimumHeap<T>::reserve(int capacity)
 }
 
 template<typename T>
-void MinimumHeap<T>::push_back(T data)
+void MinimumBinaryHeap<T>::push_back(T data)
 {
     if (_size == _capacity)
     {
@@ -33,7 +33,7 @@ void MinimumHeap<T>::push_back(T data)
 }
 
 template<typename T>
-void MinimumHeap<T>::pop_back()
+void MinimumBinaryHeap<T>::pop_back()
 {
     if (_size == 0)
     {
@@ -53,7 +53,7 @@ void MinimumHeap<T>::pop_back()
  * @return Get index number of parent node
  */
 template <typename T>
-int MinimumHeap<T>::get_parent_index(int index)
+int MinimumBinaryHeap<T>::get_parent_index(int index)
 {
     return (index - 1) / 2;
 }
@@ -63,7 +63,7 @@ int MinimumHeap<T>::get_parent_index(int index)
  * @return Get index number of left child node
  */
 template <typename T>
-int MinimumHeap<T>::get_left_child_index(int index)
+int MinimumBinaryHeap<T>::get_left_child_index(int index)
 {
     return index * 2 + 1;
 }
@@ -73,7 +73,7 @@ int MinimumHeap<T>::get_left_child_index(int index)
  * @return Get index number of right child node
  */
 template <typename T>
-int MinimumHeap<T>::get_right_child_index(int index)
+int MinimumBinaryHeap<T>::get_right_child_index(int index)
 {
     return index * 2 + 2;
 }
@@ -84,7 +84,7 @@ int MinimumHeap<T>::get_right_child_index(int index)
  * @param index Index number of node
  */
 template <typename T>
-void MinimumHeap<T>::heapify(int index)
+void MinimumBinaryHeap<T>::heapify(int index)
 {
     while (get_left_child_index(index) < _size - 1)
     {
@@ -114,7 +114,7 @@ void MinimumHeap<T>::heapify(int index)
  * @return Get data from `Minimum Heap`
  */
 template <typename T>
-T MinimumHeap<T>::top()
+T MinimumBinaryHeap<T>::top()
 {
     if (_size == 0)
     {
@@ -130,7 +130,7 @@ T MinimumHeap<T>::top()
  * @param data New data
  */
 template <typename T>
-void MinimumHeap<T>::insert(T data)
+void MinimumBinaryHeap<T>::insert(T data)
 {
     push_back(data);
 
@@ -147,7 +147,7 @@ void MinimumHeap<T>::insert(T data)
  * Remove data from `Minimum Heap`
  */
 template <typename T>
-void MinimumHeap<T>::extract()
+void MinimumBinaryHeap<T>::extract()
 {
     swap(_root[0], _root[_size - 1]);
     

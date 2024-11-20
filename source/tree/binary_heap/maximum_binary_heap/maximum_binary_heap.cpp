@@ -1,12 +1,12 @@
 #include <iostream>
 #include <algorithm>
 
-#include "maximum_heap.hpp"
+#include "maximum_binary_heap.hpp"
 
 using namespace std;
 
 template<typename T>
-void MaximumHeap<T>::reserve(int capacity)
+void MaximumBinaryHeap<T>::reserve(int capacity)
 {
     _capacity = capacity;
 
@@ -22,7 +22,7 @@ void MaximumHeap<T>::reserve(int capacity)
 }
 
 template<typename T>
-void MaximumHeap<T>::push_back(T data)
+void MaximumBinaryHeap<T>::push_back(T data)
 {
     if (_size == _capacity)
     {
@@ -33,7 +33,7 @@ void MaximumHeap<T>::push_back(T data)
 }
 
 template<typename T>
-void MaximumHeap<T>::pop_back()
+void MaximumBinaryHeap<T>::pop_back()
 {
     if (_size == 0)
     {
@@ -53,7 +53,7 @@ void MaximumHeap<T>::pop_back()
  * @return Get index number of parent node
  */
 template <typename T>
-int MaximumHeap<T>::get_parent_index(int index)
+int MaximumBinaryHeap<T>::get_parent_index(int index)
 {
     return (index - 1) / 2;
 }
@@ -63,7 +63,7 @@ int MaximumHeap<T>::get_parent_index(int index)
  * @return Get index number of left child node
  */
 template <typename T>
-int MaximumHeap<T>::get_left_child_index(int index)
+int MaximumBinaryHeap<T>::get_left_child_index(int index)
 {
     return index * 2 + 1;
 }
@@ -73,7 +73,7 @@ int MaximumHeap<T>::get_left_child_index(int index)
  * @return Get index number of right child node
  */
 template <typename T>
-int MaximumHeap<T>::get_right_child_index(int index)
+int MaximumBinaryHeap<T>::get_right_child_index(int index)
 {
     return index * 2 + 2;
 }
@@ -84,7 +84,7 @@ int MaximumHeap<T>::get_right_child_index(int index)
  * @param index Index number of node
  */
 template <typename T>
-void MaximumHeap<T>::heapify(int index)
+void MaximumBinaryHeap<T>::heapify(int index)
 {
     while (get_left_child_index(index) < _size - 1)
     {
@@ -114,7 +114,7 @@ void MaximumHeap<T>::heapify(int index)
  * @return Get data from `Maximum Heap`
  */
 template <typename T>
-T MaximumHeap<T>::top()
+T MaximumBinaryHeap<T>::top()
 {
     if (_size == 0)
     {
@@ -130,7 +130,7 @@ T MaximumHeap<T>::top()
  * @param data : New data
  */
 template <typename T>
-void MaximumHeap<T>::insert(T data)
+void MaximumBinaryHeap<T>::insert(T data)
 {
     push_back(data);
 
@@ -147,7 +147,7 @@ void MaximumHeap<T>::insert(T data)
  * Remove data from `Maximum Heap`
  */
 template <typename T>
-void MaximumHeap<T>::extract()
+void MaximumBinaryHeap<T>::extract()
 {
     swap(_root[0], _root[_size - 1]);
     

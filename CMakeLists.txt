@@ -13,7 +13,7 @@ set(LIBRARIES
     stack 
     queue circular_queue 
     singly_linked_list doubly_linked_list circular_singly_linked_list circular_doubly_linked_list 
-    maximum_heap minimum_heap
+    maximum_binary_heap minimum_binary_heap
     hash_table)
 
 foreach(LIBRARY ${LIBRARIES})
