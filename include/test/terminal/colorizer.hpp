@@ -3,12 +3,16 @@
 
 #include <string>
 
-namespace colorize {
-    const std::string COLOR_PREFIX = "\033[";
-    const std::string COLOR_SUFFIX = "m";
-    const std::string COLOR_RESET = "\033[0m";
+using namespace std;
 
-    enum class Foreground {
+namespace test::terminal
+{
+    const string COLOR_PREFIX = "\033[";
+    const string COLOR_SUFFIX = "m";
+    const string COLOR_RESET  = "\033[0m";
+
+    enum class Foreground
+    {
         Black = 0,
         Red,
         Green,
@@ -28,7 +32,8 @@ namespace colorize {
         BrightWhite,
     };
 
-    enum class Background {
+    enum class Background
+    {
         Black = 0,
         Red,
         Green,
@@ -48,7 +53,8 @@ namespace colorize {
         BrightWhite,
     };
 
-    enum class Style {
+    enum class Style
+    {
         Default = 0,
         Bold,
         Faint,
@@ -56,12 +62,14 @@ namespace colorize {
         Underline
     };
 
-    inline std::string set_color(Foreground foreground = Foreground::Default, Background background = Background::Default, Style style = Style::Default) {
-        std::string foreground_text;
-        std::string background_text;
-        std::string style_text;
+    inline string set_color(Foreground foreground = Foreground::Default, Background background = Background::Default, Style style = Style::Default)
+    {
+        string foreground_text;
+        string background_text;
+        string style_text;
 
-        switch (foreground) {
+        switch (foreground)
+        {
             case Foreground::Black:         foreground_text = "30;"; break;
             case Foreground::Red:           foreground_text = "31;"; break;
             case Foreground::Green:         foreground_text = "32;"; break;
@@ -81,7 +89,8 @@ namespace colorize {
             case Foreground::BrightWhite:   foreground_text = "97;"; break;
         }
 
-        switch (background) {
+        switch (background)
+        {
             case Background::Black:         background_text = "40";  break;
             case Background::Red:           background_text = "41";  break;
             case Background::Green:         background_text = "42";  break;
@@ -101,7 +110,8 @@ namespace colorize {
             case Background::BrightWhite:   background_text = "107"; break;
         }
 
-        switch (style) {
+        switch (style)
+        {
             case Style::Default:   style_text = "0;"; break;
             case Style::Bold:      style_text = "1;"; break;
             case Style::Faint:     style_text = "2;"; break;
