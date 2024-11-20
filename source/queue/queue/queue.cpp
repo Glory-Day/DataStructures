@@ -3,6 +3,8 @@
 
 #include "queue.hpp"
 
+using namespace std;
+
 /**
  * Push data in `queue`
  *
