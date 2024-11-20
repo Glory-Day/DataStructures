@@ -1,6 +1,10 @@
+<br><br>
+
 <div align="center">
     <img src="/.resources/thumbnail.svg"/>
 </div>
+
+<br><br>
 
 <p align="center">
     <img src="https://img.shields.io/badge/CMake-064F8C.svg?&style=for-the-badge&logo=CMake&logoColor=white"/>
