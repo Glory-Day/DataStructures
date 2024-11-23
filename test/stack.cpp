@@ -21,15 +21,15 @@ int main()
 
     unit.print();
 
-    bool isLoop = true;
-    while (isLoop == true)
+    bool is_loop = true;
+    while (is_loop == true)
     {
         unit.print_command_block();
 
-        int index;
-        cin >> index;
+        int command;
+        cin >> command;
 
-        switch (index)
+        switch (command)
         {
             case 1:
             {
@@ -84,13 +84,13 @@ int main()
             }
             default:
             {
-                isLoop = false;
+                is_loop = false;
 
                 break;
             }
         }
 
-        if (isLoop)
+        if (is_loop)
         {
             unit.print_sucess_block();
         }
