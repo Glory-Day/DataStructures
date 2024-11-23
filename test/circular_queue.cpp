@@ -2,7 +2,7 @@
 #include <string>
 
 #include "circular_queue.hpp"
-#include "queue\circular_queue\circular_queue.cpp"
+#include "queue\circular_queue.cpp"
 
 #include "test\terminal\unit.hpp"
 
@@ -21,8 +21,8 @@ int main()
 
     unit.print();
 
-    bool isLoop = true;
-    while (isLoop)
+    bool is_loop = true;
+    while (is_loop)
     {
         unit.print_command_block();
 
@@ -84,13 +84,13 @@ int main()
             }
             default:
             {
-                isLoop = false;
+                is_loop = false;
 
                 break;
             }
         }
 
-        if (isLoop)
+        if (is_loop)
         {
             unit.print_sucess_block();
         }

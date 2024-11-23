@@ -1,8 +1,8 @@
 #include <iostream>
 #include <string>
 
-#include "queue.hpp"
-#include "queue\queue\queue.cpp"
+#include "linked_queue.hpp"
+#include "queue\linked_queue.cpp"
 
 #include "test\terminal\unit.hpp"
 
@@ -17,12 +17,12 @@ int main()
     unit.add("front()");
     unit.add("empty()");
 
-    Queue<int> queue = Queue<int>();
+    LinkedQueue<int> queue = LinkedQueue<int>();
 
     unit.print();
 
-    bool isLoop = true;
-    while (isLoop)
+    bool is_loop = true;
+    while (is_loop)
     {
         unit.print_command_block();
 
@@ -84,13 +84,13 @@ int main()
             }
             default:
             {
-                isLoop = false;
+                is_loop = false;
 
                 break;
             }
         }
 
-        if (isLoop)
+        if (is_loop)
         {
             unit.print_sucess_block();
         }

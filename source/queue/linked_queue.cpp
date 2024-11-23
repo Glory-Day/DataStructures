@@ -1,7 +1,7 @@
 #include <iostream>
 #include <cstdlib>
 
-#include "queue.hpp"
+#include "linked_queue.hpp"
 
 using namespace std;
 
@@ -11,7 +11,7 @@ using namespace std;
  * @param data : Data to push
  */
 template<typename T>
-void Queue<T>::enqueue(T data)
+void LinkedQueue<T>::enqueue(T data)
 {
     Node<T>* node = new Node(data);
 
@@ -32,7 +32,7 @@ void Queue<T>::enqueue(T data)
  * Pop data in `queue`
  */
 template<typename T>
-void Queue<T>::dequeue()
+void LinkedQueue<T>::dequeue()
 {
     // Throw exception when accessing null pointer
     if (empty())
@@ -62,7 +62,7 @@ void Queue<T>::dequeue()
  * @return First stored data in `queue`
  */
 template<typename T>
-T Queue<T>::front()
+T LinkedQueue<T>::front()
 {
     // Throw exception when accessing null pointer
     if (empty())
@@ -77,7 +77,7 @@ T Queue<T>::front()
  * @return Check queue is empty or not
  */
 template<typename T>
-bool Queue<T>::empty()
+bool LinkedQueue<T>::empty()
 {
     return _begin == nullptr && _end == nullptr;
 }
