@@ -24,10 +24,11 @@ namespace test::terminal
         void add(const string command);
 
         void print();
-        void print_line_block(const string&);
+        void print_line(const string&, Foreground, Background, Style);
         void print_command_block();
         void print_input_block();
         void print_output_block();
+        void print_output_line();
         void print_sucess_block();
         void print_exception_block(const string&);
         void print_finish_block();
@@ -60,10 +61,9 @@ namespace test::terminal
         cout << endl;
     }
 
-    inline void Unit::print_line_block(const string& line)
+    inline void Unit::print_line(const string& line, Foreground foreground = Foreground::Default, Background background = Background::Default, Style style = Style::Default)
     {
-        cout << set_color(Foreground::Yellow) << "[LINE  ] " << COLOR_RESET;
-        cout << line << endl; 
+        cout << set_color(foreground, background, style) << line << COLOR_RESET;
     }
 
     inline void Unit::print_command_block()
@@ -79,6 +79,13 @@ namespace test::terminal
     inline void Unit::print_output_block()
     {
         cout << set_color(Foreground::Yellow) << "[OUTPUT] " << COLOR_RESET;
+    }
+
+    inline void Unit::print_output_line()
+    {
+        print_output_block();
+
+        cout << endl << endl;
     }
 
     inline void Unit::print_sucess_block()
