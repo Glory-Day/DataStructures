@@ -1,30 +1,18 @@
 #ifndef __MINIMUM_BINARY_HEAP_HPP__
 #define __MINIMUM_BINARY_HEAP_HPP__
 
+#include "binary_heap.hpp"
+
 template<typename T>
-class MinimumBinaryHeap
+class MinimumBinaryHeap : public BinaryHeap<T>
 {
-private:
-    T*  _root;     // Head of elements
-    int _capacity; // Maximum possible size
-    int _size;     // Current index number of elements
-
-    void reserve(int);
-    void push_back(T);
-    void pop_back();
-
-    void heapify(int);
-
-    int get_parent_index(int);
-    int get_left_child_index(int);
-    int get_right_child_index(int);
+protected:
+    void heapify(int index) override final;
 
 public:
-    explicit MinimumBinaryHeap() : _root{new T[1]}, _capacity{1}, _size{0} {}
+    explicit MinimumBinaryHeap() : BinaryHeap<T>() {}
 
-    void insert(T);
-    void extract();
-    T    top();
+    void insert(T data) override final;
 };
 
 #endif

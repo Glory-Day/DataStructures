@@ -1,7 +1,6 @@
 #include <iostream>
 
-#include "minimum_binary_heap.hpp"
-#include "heap\binary_heap\minimum_binary_heap\minimum_binary_heap.cpp"
+#include "heap\minimum_binary_heap.cpp"
 
 #include "test\terminal\unit.hpp"
 
@@ -19,8 +18,8 @@ int main()
 
     unit.print();
 
-    bool isLoop = true;
-    while (isLoop)
+    bool is_loop = true;
+    while (is_loop)
     {
         unit.print_command_block();
 
@@ -72,13 +71,13 @@ int main()
             }
             default:
             {
-                isLoop = false;
+                is_loop = false;
 
                 break;
             }
         }
 
-        if (isLoop)
+        if (is_loop)
         {
             unit.print_sucess_block();
         }
