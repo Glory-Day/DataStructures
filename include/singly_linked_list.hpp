@@ -6,38 +6,21 @@
 #include <string>
 
 #include "node.hpp"
+#include "linked_list.hpp"
 
 using namespace std;
 
 template<typename T>
-class SinglyLinkedList {
-private:
-    Node<T>* _begin; // Head of linked list.
-    Node<T>* _end;   // Tail of linked list.
-
-    int _size;
-
+class SinglyLinkedList : public LinkedList<Node<T>, T>
+{
 public:
-    SinglyLinkedList() : _begin{nullptr}, _end{nullptr}, _size(0) {}
+    SinglyLinkedList() : LinkedList<Node<T>, T>() {}
 
-    ~SinglyLinkedList()
-    {
-        clear();
-
-        delete _begin;
-        
-        _begin = nullptr;
-        _end = nullptr;
-    }
-
-    void push(T);
-    void pop();
-    void insert(int, T);
-    void remove(int);
-    int  search(T);
-    bool empty();
-    int  size();
-    void clear();
+    virtual void push(T) override final;
+    virtual void pop() override final;
+    virtual void insert(int, T) override final;
+    virtual void remove(int) override final;
+    virtual int  search(T) override final;
 
     string display();
 };

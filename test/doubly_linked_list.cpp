@@ -3,7 +3,7 @@
 #include <vector>
 
 #include "doubly_linked_list.hpp"
-#include "linked_list\doubly_linked_list\doubly_linked_list.cpp"
+#include "linked_list\doubly_linked_list.cpp"
 
 #include "test\terminal\unit.hpp"
 
@@ -27,8 +27,8 @@ int main()
 
     unit.print();
 
-    bool isLoop = true;
-    while (isLoop)
+    bool is_loop = true;
+    while (is_loop)
     {
         unit.print_command_block();
 
@@ -148,24 +148,34 @@ int main()
             case 9:
             {
                 vector<string> output = linked_list.display();
-                for (int i = 0; i < (int)output.size(); i++)
-                {
-                    unit.print_output_block();
 
-                    cout << output[i] << endl;
-                }
+                unit.print_output_line();
+
+                unit.print_line("FORWARD", Foreground::Default, Background::Default, Style::Bold);
+                cout << endl;
+
+                cout << output[0] << endl;
+
+                cout << endl;
+
+                unit.print_line("REVERSE", Foreground::Default, Background::Default, Style::Bold);
+                cout << endl;
+
+                cout << output[1] << endl;
+
+                cout << endl;
 
                 break;
             }
             default:
             {
-                isLoop = false;
+                is_loop = false;
 
                 break;
             }
         }
 
-        if (isLoop)
+        if (is_loop)
         {
             unit.print_sucess_block();
         }

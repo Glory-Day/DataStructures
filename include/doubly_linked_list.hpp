@@ -6,39 +6,21 @@
 #include <string>
 
 #include "node.hpp"
+#include "linked_list.hpp"
 
 using namespace std;
 
 template<typename T>
-class DoublyLinkedList
+class DoublyLinkedList : public LinkedList<Node<T>, T>
 {
-private:
-    Node<T>* _begin; // Head of linked list.
-    Node<T>* _end;   // Tail of linked list.
-
-    int _size;
-
 public:
-    DoublyLinkedList() : _begin{nullptr}, _end{nullptr}, _size(0) {}
+    DoublyLinkedList() : LinkedList<Node<T>, T>() {}
 
-    ~DoublyLinkedList()
-    {
-        clear();
-
-        delete _begin;
-        
-        _begin = nullptr;
-        _end = nullptr;
-    }
-
-    void push(T);
-    void pop();
-    void insert(int, T);
-    void remove(int);
-    int  search(T);
-    bool empty();
-    int  size();
-    void clear();
+    virtual void push(T) override final;
+    virtual void pop() override final;
+    virtual void insert(int, T) override final;
+    virtual void remove(int) override final;
+    virtual int  search(T) override final;
 
     vector<string> display();
 };
