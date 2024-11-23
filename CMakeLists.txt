@@ -11,9 +11,10 @@ add_subdirectory(test)
 
 set(LIBRARIES 
     stack 
-    queue circular_queue 
-    singly_linked_list doubly_linked_list circular_singly_linked_list circular_doubly_linked_list 
-    maximum_binary_heap minimum_binary_heap
+    queue
+    linked_list
+    heap
+    tree
     hash_table)
 
 foreach(LIBRARY ${LIBRARIES})
