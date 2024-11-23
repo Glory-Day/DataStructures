@@ -10,6 +10,7 @@
 
 using namespace std;
 
+template<typename T>
 class HashTable
 {
 private:
@@ -18,18 +19,18 @@ private:
     int _size;  // Size of table.
     int _count; // Number of data.
 
-    Node** _table;
+    Node<T>** _table;
 
-    int get_hash_code(int key) const;
-    void reserve(int size);
-    void rehashing(int size);
+    int get_hash_code(int) const;
+    void reserve(int);
+    void rehashing(int);
 
 public:
     HashTable() { }
     HashTable(int size) : _size(size), _count(0)
     {
         // Allocate the first demension of table.
-        _table = new Node*[_size];
+        _table = new Node<T>*[_size];
         for (int i = 0; i < _size; i++)
         {
             _table[i] = nullptr;
@@ -40,13 +41,14 @@ public:
     {
         for (int i = 0; i < _size; i++)
         {
-            Node* current = _table[i];
+            Node<T>* current = _table[i];
             while (current != nullptr)
             {
-                Node* previous = current;
-                current = current->next;
+                Node<T>* previous = current;
+                current = current->get_next_node();
 
                 delete previous;
+
                 previous = nullptr;
             }
         }
@@ -56,9 +58,9 @@ public:
         _table = nullptr;
     }
 
-    void insert(Node data);
-    void remove(int key);
-    Node* search(int key) const;
+    void     insert(Node<T>);
+    void     remove(int);
+    Node<T>* search(int) const;
 
     vector<string> display();
 };

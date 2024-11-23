@@ -18,26 +18,26 @@ int main()
     unit.add("Search(value)");
     unit.add("Display()");
 
-    unit.print_line_block("Set size of hash table");
-    unit.print_input_block();
+    unit.print();
 
+    unit.print_line("Set Size Of Hash Table : ", Foreground::Yellow, Background::Default, Style::Bold);
+    
     int size;
     cin >> size;
 
-    HashTable hash_table = HashTable(size);
-    Node* value = nullptr;
+    cout << endl;
 
-    unit.print();
+    HashTable<string> hash_table = HashTable<string>(size);
 
-    bool isLoop = true;
-    while (isLoop == true)
+    bool is_loop = true;
+    while (is_loop == true)
     {
         unit.print_command_block();
 
-        int index;
-        cin >> index;
+        int command;
+        cin >> command;
 
-        switch (index)
+        switch (command)
         {
             case 1:
             {
@@ -47,7 +47,7 @@ int main()
                 string value;
                 cin >> key >> value;
                 
-                hash_table.insert(Node(key, value));
+                hash_table.insert(Node<string>(key, value));
 
                 break;
             }
@@ -76,8 +76,8 @@ int main()
                 int key;
                 cin >> key;
 
-                value = hash_table.search(key);
-                string output = (value != nullptr ? value->value : "NONE");
+                Node<string>* node = hash_table.search(key);
+                string output = (node != nullptr ? node->get_value() : "NONE");
 
                 unit.print_output_block();
 
@@ -87,25 +87,27 @@ int main()
             }
             case 4:
             {
+                unit.print_output_line();
+
                 vector<string> lines = hash_table.display();
                 for (int i = 0; i < (int)lines.size(); i++)
                 {
-                    unit.print_output_block();
-
                     cout << lines[i] << endl;
                 }
+
+                cout << endl;
 
                 break;
             }
             default:
             {
-                isLoop = false;
+                is_loop = false;
 
                 break;
             }
         }
 
-        if (isLoop) 
+        if (is_loop) 
         {
             unit.print_sucess_block();
         }

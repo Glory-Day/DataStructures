@@ -7,12 +7,14 @@
 
 using namespace std;
 
-int HashTable::get_hash_code(int key) const
+template<typename T>
+int HashTable<T>::get_hash_code(int key) const
 {
     return floor(_size * (key * A - floor(key * A)));
 }
 
-void HashTable::reserve(int size)
+template<typename T>
+void HashTable<T>::reserve(int size)
 {
     int cache = _size;
     _size = size;
@@ -20,9 +22,10 @@ void HashTable::reserve(int size)
     rehashing(cache);
 }
 
-void HashTable::rehashing(int size)
+template<typename T>
+void HashTable<T>::rehashing(int size)
 {
-    Node** table = new Node*[_size];
+    Node<T>** table = new Node<T>*[_size];
     for (int i = 0; i < _size; i++)
     {
         table[i] = 0;
@@ -30,24 +33,24 @@ void HashTable::rehashing(int size)
 
     for (int i = 0; i < size; i++)
     {
-        Node* current = _table[i];
-        Node* previous = nullptr;
+        Node<T>* current = _table[i];
+        Node<T>* previous = nullptr;
 
         while (current != nullptr)
         {
-            previous = current->next;
+            previous = current->get_next_node();
 
-            int index = get_hash_code(current->key);
+            int index = get_hash_code(current->get_key());
             if (table[index] == nullptr)
             {
                 table[index] = current;
-                table[index]->next = 0;
+                table[index]->set_next_node(nullptr);
             }
             else
             {
-                Node* next = table[index]->next;
-                table[index]->next = current;
-                current->next = next;
+                Node<T>* next_node = table[index]->get_next_node();
+                table[index]->set_next_node(current);
+                current->set_next_node(next_node);
             }
 
             current = previous;
@@ -59,7 +62,8 @@ void HashTable::rehashing(int size)
     _table = table;
 }
 
-void HashTable::insert(Node data)
+template<typename T>
+void HashTable<T>::insert(Node<T> data)
 {
     _count++;
 
@@ -68,31 +72,32 @@ void HashTable::insert(Node data)
         reserve(_size * 2);
     }
 
-    int index = get_hash_code(data.key);
-    Node* clone = new Node(data);
+    int index = get_hash_code(data.get_key());
+    Node<T>* node = new Node<T>(data);
 
     if (_table[index] == nullptr)
     {
-        _table[index] = clone;
+        _table[index] = node;
     }
     else
     {
-        Node* next = _table[index]->next;
-        _table[index]->next = clone;
-        clone->next = next;
+        Node<T>* next_node = _table[index]->get_next_node();
+        _table[index]->set_next_node(node);
+        node->set_next_node(next_node);
     }
 }
 
-void HashTable::remove(int key)
+template<typename T>
+void HashTable<T>::remove(int key)
 {
     int index = get_hash_code(key);
-    Node* current = _table[index];
-    Node* previous = nullptr;
+    Node<T>* current = _table[index];
+    Node<T>* previous = nullptr;
 
-    while (current != nullptr && current->key != key)
+    while (current != nullptr && current->get_key() != key)
     {
         previous = current;
-        current = current->next;
+        current = current->get_next_node();
     }
 
     if (current == nullptr)
@@ -103,11 +108,11 @@ void HashTable::remove(int key)
     {
         if (previous == nullptr)
         {
-            _table[index] = current->next;
+            _table[index] = current->get_next_node();
         }
         else
         {
-            previous->next = current->next;
+            previous->set_next_node(current->get_next_node());
         }
 
         delete current;
@@ -123,37 +128,39 @@ void HashTable::remove(int key)
     }
 }
 
-Node* HashTable::search(int key) const
+template<typename T>
+Node<T>* HashTable<T>::search(int key) const
 {
     int index = get_hash_code(key);
-    Node* current = _table[index];
+    Node<T>* current = _table[index];
 
     while (current != nullptr)
     {
-        if (current->key == key)
+        if (current->get_key() == key)
         {
             return current;
         }
 
-        current = current->next;
+        current = current->get_next_node();
     }
 
     return nullptr;
 }
 
-vector<string> HashTable::display()
+template<typename T>
+vector<string> HashTable<T>::display()
 {
     vector<string> lines;
     for (int i = 0; i < _size; i++)
     {
-        string line = "(" + to_string(i) + ") ";
+        string line = "(" + to_string(i) + ")";
 
-        Node* current = _table[i];
+        Node<T>* current = _table[i];
         while (current != nullptr)
         {
-            line = line + "(" + to_string(current->key) + "," + current->value + ") ";
+            line = line + "\u2500(" + to_string(current->get_key()) + "," + current->get_value() + ")";
             
-            current = current->next;
+            current = current->get_next_node();
         }
 
         lines.push_back(line);
