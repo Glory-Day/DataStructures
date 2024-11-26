@@ -15,7 +15,7 @@ int main()
     unit.add("insert(data)");
     unit.add("remove(data)");
     unit.add("search(data)");
-    unit.add("traversal()");
+    unit.add("traverse()");
     unit.add("display()");
 
     BinarySearchTree<int> tree = BinarySearchTree<int>();
@@ -92,25 +92,25 @@ int main()
             }
             case 4:
             {
-                vector<string> output = tree.traversal();
+                vector<string> output = tree.traverse();
 
                 unit.print_output_line();
 
-                unit.print_line("Preorder", Foreground::Default, Background::Default, Style::Bold);
+                unit.print_line("PREORDER", Foreground::Default, Background::Default, Style::Bold);
                 cout << endl;
 
                 cout << output[0] << endl;
 
                 cout << endl;
 
-                unit.print_line("Inorder", Foreground::Default, Background::Default, Style::Bold);
+                unit.print_line("INORDER", Foreground::Default, Background::Default, Style::Bold);
                 cout << endl;
 
                 cout << output[1] << endl;
 
                 cout << endl;
 
-                unit.print_line("Post-order", Foreground::Default, Background::Default, Style::Bold);
+                unit.print_line("POST-ORDER", Foreground::Default, Background::Default, Style::Bold);
                 cout << endl;
 
                 cout << output[2] << endl;
@@ -123,7 +123,7 @@ int main()
             {
                 unit.print_output_line();
 
-                vector<string> output = tree.display();
+                vector<string> output = dynamic_cast<Tree<Node<int>, int>*>(&tree)->display();
                 for (int i = 0; i < (int)output.size(); i++)
                 {
                     cout << output[i] << endl;

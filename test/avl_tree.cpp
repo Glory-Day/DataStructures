@@ -15,7 +15,7 @@ int main()
     unit.add("insert(data)");
     unit.add("remove(data)");
     unit.add("search(data)");
-    unit.add("traversal()");
+    unit.add("traverse()");
     unit.add("display()");
 
     AVLTree<int> tree = AVLTree<int>();
@@ -92,7 +92,7 @@ int main()
             }
             case 4:
             {
-                vector<string> output = tree.traversal();
+                vector<string> output = tree.traverse();
 
                 unit.print_output_line();
 
@@ -123,7 +123,7 @@ int main()
             {
                 unit.print_output_line();
 
-                vector<string> output = tree.display();
+                vector<string> output = dynamic_cast<Tree<Node<int>, int>*>(&tree)->display();
                 for (int i = 0; i < (int)output.size(); i++)
                 {
                     cout << output[i] << endl;

@@ -249,3 +249,29 @@ bool AVLTree<T>::search(T data)
 
     return false;
 }
+
+template<typename T>
+string AVLTree<T>::get_data_output(string& path, Node<T>* node)
+{
+    string output;
+
+    string data = (node != nullptr ? to_string(node->get_data()) + "(" + to_string(node->get_height()) + ")" : "-");
+    if (path.empty() == false)
+    {
+        switch (path.back())
+        {
+            case 'L':
+                output = "  \u251C\u2500[L:" + data + "]";
+                break;
+            case 'R':
+                output = "  \u2514\u2500[R:" + data + "]";
+                break;
+        }
+    }
+    else
+    {        
+        output = "[T:" + data + "]";
+    }
+
+    return output;
+}

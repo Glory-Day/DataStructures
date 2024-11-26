@@ -15,23 +15,22 @@ template<typename T>
 class BinaryTree : public Tree<Node<T>, T>
 {
 private:
-    void set_preorder_traversal_output(Node<T>*, string&);
-    void set_inorder_traversal_output(Node<T>*, string&);
-    void set_post_order_traversal_output(Node<T>*, string&);
-
     string get_inorder_traversal_output();
     string get_preorder_traversal_output();
     string get_post_order_traversal_output();
 
-    void display(vector<string>&, string, Node<T>*);
-
 protected:
     BinaryTree() : Tree<Node<T>, T>() {}
 
-public:
-    virtual vector<string> traversal() override final;
+    virtual void set_preorder_traversal_output(Node<T>*, string&);
+    virtual void set_inorder_traversal_output(Node<T>*, string&);
+    virtual void set_post_order_traversal_output(Node<T>*, string&);
 
-    virtual vector<string> display() override final;
+    virtual string get_data_output(string&, Node<T>*) override;
+    virtual void display(vector<string>&, string, Node<T>*) override;
+
+public:
+    virtual vector<string> traverse() override final;
 };
 
 #endif

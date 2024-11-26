@@ -9,7 +9,13 @@ private:
     Iterator<T>** _iterator;
 
 protected:
-    Iterator(int size) : _size(size), _iterator(new Iterator<T>*[size]) {}
+    Iterator(int size) : _size(size), _iterator(new Iterator<T>*[size])
+    {
+        for (int i = 0; i < size; i++)
+        {
+            _iterator[i] = nullptr;
+        }
+    }
 
     ~Iterator()
     {

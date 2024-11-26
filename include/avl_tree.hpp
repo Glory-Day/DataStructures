@@ -27,6 +27,9 @@ private:
     Node<T>* rotate_left(Node<T>*);
     Node<T>* rotate_right(Node<T>*);
 
+protected:
+    virtual string get_data_output(string&, Node<T>*) override final;
+
 public:
     AVLTree() : BinaryTree<T>() {}
 
